@@ -1,0 +1,384 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="ie6"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9]>    <html class="ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+ <!--<![endif]-->
+<head>
+	<title>News Feed Details</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		*,
+		button,
+		input,
+		select,
+		textarea,
+		a,
+		label,
+		p,
+		span,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		ul,
+		ol,
+		li,
+		dl,
+		dt,
+		dd,
+		table,
+		th,
+		td,
+		tr,
+		img,
+		iframe,
+		object,
+		embed,
+		audio,
+		video,
+		canvas,
+		form,
+		fieldset,
+		legend,
+		.win-type-x-large,
+		.win-type-xx-large,
+		.font-fix {
+			font-family: "Microsoft YaHei", "Segoe UI", "Ebrima", "Nirmala", "Gadugi", "Segoe UI Emoji", "Segoe UI Symbol", "Meiryo", "Leelawadee", "Microsoft JhengHei", "Malgun Gothic", "Estrangelo Edessa", "Microsoft Himalaya", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Tai Le", "Microsoft Yi Baiti", "Mongolian Baiti", "MV Boli", "Myanmar Text", "Javanese Text", "Cambria Math";
+		}
+
+		a {
+			transition: all 0.3s cubic-bezier(0.1, 0.9, 0.2, 1);
+			-ms-transition: all 0.5s cubic-bezier(0.1, 0.9, 0.2, 1);
+		}
+
+		body {
+			margin: 0;
+			-ms-overflow-style: -ms-autohiding-scrollbar;
+			width: 100%;
+			height: 100%;
+			overflow-x: auto;
+			overflow-y: auto;
+		}
+
+		#feed-header {
+			padding: 0 10px;
+			background-color: #72859b;
+			background-image: linear-gradient(to right, #5b6c7e, #8597af, #5b6c7e);
+			background-image: -ms-linear-gradient(to right, #5b6c7e, #8597af, #5b6c7e);
+			color: white;
+			border-bottom: 1px solid #4d5b6b;
+			box-sizing: border-box;
+			height: 70px;
+			width: 100%;
+			top: 0;
+			left: 0;
+			position: absolute;
+		}
+
+		#feed-background {
+			background-color: #72859b;
+			border-bottom: 1px solid #4d5b6b;
+			box-sizing: border-box;
+			height: 70px;
+			width: 100%;
+			top: 0;
+			left: 0;
+			position: absolute;
+			z-index: -1;
+		}
+
+		header a {
+			color: white;
+			text-decoration: none;
+		}
+
+			header a:hover {
+				color: #d6f4ff;
+			}
+
+			header a:active {
+				color: #abdef1;
+			}
+
+		#feed-header a,
+		#feed-header a * {
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			width: 100%;
+		}
+
+		#feed-title {
+			font-size: 11pt;
+			font-weight: normal;
+			margin: 5px 0 2.5px;
+		}
+
+		#feed-pubdate {
+			font-size: 9pt;
+			font-weight: normal;
+			margin: 2px 0;
+			color: #eee;
+		}
+
+		#feed-channel {
+			font-size: 9pt;
+			font-weight: bold;
+			margin: 2px 0 5px;
+		}
+		.ie7 #feed-pubdate,
+		.ie8 #feed-pubdate {
+			color: rgb(164, 164, 164);
+		}
+		.ie7 header a,
+		.ie8 header a {
+			color: black;
+		}
+		.ie7 #feed-background,
+		.ie8 #feed-background {
+			display: none;
+		}
+		#feed-url,
+		#feed-desc {
+			font-size: 9pt;
+		}
+
+		#feed-url {
+			margin: 5px;
+			background-color: rgba(182, 182, 182, 0.7);
+			border-color: rgba(0, 0, 0, 0.2);
+			color: rgb(0, 0, 0);
+			padding: 3px 5px;
+			font-weight: bold;
+			transition: all 0.3s cubic-bezier(0.1, 0.9, 0.2, 1);
+			-ms-transition: all 0.5s cubic-bezier(0.1, 0.9, 0.2, 1);
+		}
+
+			#feed-url:hover {
+				background-color: rgba(205, 205, 205, 0.82);
+				border-color: rgba(164, 164, 164, 0.45);
+			}
+
+			#feed-url:active {
+				background-clip: border-box;
+				background-color: rgb(0, 0, 0);
+				border-color: transparent;
+				color: rgb(255, 255, 255);
+			}
+
+		#feed-desc {
+			padding: 5px;
+			box-sizing: border-box;
+			width: 100%;
+			max-width: 100%;
+		}
+
+		#feed-content {
+			box-sizing: border-box;
+			padding: 10px;
+			width: 100%;
+			max-width: 100%;
+			overflow-x: auto;
+			overflow-y: auto;
+			-ms-overflow-style: -ms-autohiding-scrollbar;
+			position: absolute;
+			top: 70px;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+
+		#feed-desc * {
+			max-width: 100%;
+		}
+
+		#feed-container {
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			overflow-x: auto;
+			overflow-y: auto;
+			position: absolute;
+			max-width: 100%;
+		}
+
+		#header-content-divide {
+			position: absolute;
+			top: 69px;
+			left: 0;
+			right: 0;
+			height: 1px;
+			background-color: #e0e0e0;
+			margin: 0;
+			padding: 0;
+			z-index: -2;
+		}
+		.ie7 #header-content-divide,
+		.ie8 #header-content-divide {
+			position: static;
+		}
+		.ie7 #feed-container,
+		.ie8 #feed-container {
+			width: auto;
+			height: auto;
+			overflow-x: visible;
+			overflow-y: visible;
+		}
+		.ie7 #feed-desc,
+		.ie8 #feed-desc {
+			width: calc(100% - 20px);
+			overflow-x: visible;
+			overflow-y: visible;
+		}
+		.ie7 #feed-header,
+		.ie8 #feed-header {
+			width: calc(100% - 10px);
+		}
+	</style>
+	<script>
+        /**
+         * 将页面中所有 px 单位转换为 pt 单位
+         */
+        function convertPxToPt() {
+            try {
+                var conversionFactor = 72 / 96; // 1px = 0.75pt
+
+                // 1. 转换所有内联样式中的 px
+                var allElements = document.getElementsByTagName("*");
+                for (var i = 0; i < allElements.length; i++) {
+                    try {
+                        var el = allElements[i];
+                        if (el.style && el.style.cssText) {
+                            el.style.cssText = el.style.cssText.replace(/(\d+(\.\d+)?)px/gi,
+                                function(match, p1) {
+                                    return parseFloat(p1) * conversionFactor + "pt";
+                                }
+                            );
+                        }
+                    } catch (ignore) {}
+                }
+
+                // 2. 转换样式表中的 px
+                for (var i = 0; i < document.styleSheets.length; i++) {
+                    var styleSheet = document.styleSheets[i];
+                    try {
+                        // IE7/8 使用 rules，标准浏览器使用 cssRules
+                        var rules = styleSheet.cssRules || styleSheet.rules;
+                        if (!rules) continue;
+
+                        for (var j = 0; j < rules.length; j++) {
+                            try {
+                                var rule = rules[j];
+                                if (!rule.style) continue;
+
+                                // 遍历该规则的所有属性
+                                for (var k = 0; k < rule.style.length; k++) {
+                                    var propName = rule.style[k];
+                                    // 使用兼容的属性访问方式，替代 getPropertyValue / setProperty
+                                    var value = rule.style[propName];
+                                    if (typeof value === "string" && value.indexOf("px") !== -1) {
+                                        var newValue = value.replace(/(\d+(\.\d+)?)px/gi,
+                                            function(match, p1) {
+                                                return parseFloat(p1) * conversionFactor + "pt";
+                                            }
+                                        );
+                                        rule.style[propName] = newValue;
+                                    }
+                                }
+                            } catch (ignore) {}
+                        }
+                    } catch (ignore) {}
+                }
+            } catch (ignore) {}
+        }
+	</script>
+	<script>
+		(function (global) {
+			global.setTitle = function (title, url) {
+				var titleElement = document.getElementById("feed-title");
+				var aElement = titleElement.parentElement;
+				aElement.href = url;
+				titleElement.innerText = title || "";
+				titleElement.title = title || "";
+			};
+			global.setPubDate = function (pubDate) {
+				document.getElementById("feed-pubdate").innerText = pubDate || "";
+			};
+			global.setChannel = function (channel, url) {
+				var channelElement = document.getElementById("feed-channel");
+				var aElement = channelElement.parentElement;
+				aElement.href = url;
+				channelElement.innerText = channel || "";
+				channelElement.title = channel || "";
+			};
+			global.setDesc = function (desc) {
+				var descDiv = document.getElementById("feed-desc");
+				descDiv.innerHTML = desc;
+				try {
+					var links = descDiv.getElementsByTagName("a");
+					for (var i = 0; i < links.length; i++) {
+						var a = links[i];
+						a.target = "_blank";
+					}
+				} catch (e) { }
+			};
+			global.setUrl = function (url) {
+				var urlElement = document.getElementById("feed-url");
+				urlElement.setAttribute("href", url);
+				urlElement.title = url || "";
+			};
+			window.onload = function () {
+				var btn = document.getElementById("feed-url");
+				try { btn.value = external.getString("DETAIL_OPENINBROWSER"); } catch (e) { }
+				btn.onclick = function () {
+					external.openUrl(btn.getAttribute("href"));
+				};
+				var titleElement = document.getElementById("feed-title");
+				var channelElement = document.getElementById("feed-channel");
+				var aTitleElement = titleElement.parentElement;
+				var aChannelElement = channelElement.parentElement;
+				aTitleElement.onclick = function () {
+					external.openUrl(aTitleElement.href);
+					return false;
+				};
+				aChannelElement.onclick = function () {
+					external.openUrl(aChannelElement.href);
+					return false;
+				};
+				try {
+					convertPxToPt();
+				} catch (ignore) { }
+			};
+		})(this);
+	</script>
+</head>
+
+<body>
+	<div id="feed-container">
+		<div id="feed-background"></div>
+		<header id="feed-header">
+			<a>
+				<h1 id="feed-title"></h1>
+			</a>
+			<p id="feed-pubdate"></p>
+			<a>
+				<h2 id="feed-channel"></h2>
+			</a>
+		</header>
+		<hr id="header-content-divide" />
+		<section id="feed-content">
+			<input id="feed-url" type="button" value="Open in Web Browser">
+			<div id="feed-desc">
+			</div>
+		</section>
+	</div>
+</body>
+</html>

@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="SidebarDirection_Left" xml:space="preserve">
+    <value>边栏位于屏幕左侧</value>
+  </data>
+  <data name="SidebarDirection_Right" xml:space="preserve">
+    <value>边栏位于屏幕右侧，默认</value>
+  </data>
+  <data name="TileHostEvent_FlyoutClosed" xml:space="preserve">
+    <value>抽屉窗口的窗口关闭事件。当窗口关闭后执行，此时磁贴进行收尾工作。</value>
+  </data>
+  <data name="TileHostEvent_FlyoutClosing" xml:space="preserve">
+    <value>抽屉窗口的窗口是否关闭事件，当抽屉窗口即将关闭时，磁贴可以决定是否关闭。传入的是 Flyout 的 sender 和抽屉窗口的客户区组件。</value>
+  </data>
+  <data name="TileHostEvent_FlyoutInit" xml:space="preserve">
+    <value>抽屉窗口的初始化事件，当用户打开抽屉窗口时，将会进行初始化。此时会传入抽屉窗口的客户区组件。</value>
+  </data>
+  <data name="TileHostEvent_FlyoutResize" xml:space="preserve">
+    <value>抽屉窗口尺寸改变事件。将会传入抽屉窗口的尺寸和客户区尺寸。（已废弃并不再使用，请自行设计即可）</value>
+  </data>
+  <data name="TileHostEvent_FlyoutShow" xml:space="preserve">
+    <value>抽屉窗口的载入事件，当用户打开抽屉窗口时，在载入抽屉窗口后执行载入时间。此时会传入抽屉窗口的客户区组件。</value>
+  </data>
+  <data name="TileHostEvent_Properties" xml:space="preserve">
+    <value>请求显示属性窗口事件。当磁贴通过右键菜单中的“属性”选项时，会请求显示属性窗口。此时磁贴可能需要实现。注意：属性窗口在 Unload 前必须要销毁。（已被 PropertiesInit 取代）</value>
+  </data>
+  <data name="TileHostEvent_PropertiesClickCancelButton" xml:space="preserve">
+    <value>属性窗口点击取消事件。该按钮点击后自动关闭窗口。此时可以执行一些事情。</value>
+  </data>
+  <data name="TileHostEvent_PropertiesClickOkButton" xml:space="preserve">
+    <value>属性窗口点击确定事件。该按钮点击后，磁贴自行对设置项进行保存，点击后不会关闭属性窗口。</value>
+  </data>
+  <data name="TileHostEvent_PropertiesClosed" xml:space="preserve">
+    <value>属性窗口即将销毁事件</value>
+  </data>
+  <data name="TileHostEvent_PropertiesClosing" xml:space="preserve">
+    <value>属性窗口是否关闭事件</value>
+  </data>
+  <data name="TileHostEvent_PropertiesInit" xml:space="preserve">
+    <value>初始化属性窗口，当用户想要打开属性窗口时会触发该事件，该事件会进行一些初始化选项。</value>
+  </data>
+  <data name="TileHostEvent_PropertiesLoad" xml:space="preserve">
+    <value>属性窗口载入事件</value>
+  </data>
+  <data name="TileHostEvent_PropertiesResize" xml:space="preserve">
+    <value>属性窗口尺寸调整事件</value>
+  </data>
+  <data name="TileHostEvent_Resize" xml:space="preserve">
+    <value>尺寸改变事件，将会传入磁贴整体尺寸和客户区的尺寸。</value>
+  </data>
+  <data name="TileHostEvent_SidebarDirectionChanged" xml:space="preserve">
+    <value>边栏的位置改变事件。当边栏改到左侧或右侧时触发。一般磁贴不需要响应，除非有相应需求。注意：侧边栏的位置改变不是文字方向等的改变，只是单纯的位置改变。</value>
+  </data>
+  <data name="TileHostEvent_ThemeChanged" xml:space="preserve">
+    <value>主题改变事件，将会传入改变后的主题名。磁贴可以根据主题名来自行实现主题切换。</value>
+  </data>
+  <data name="TileOverflow_Auto" xml:space="preserve">
+    <value>自动接管磁贴高度调整。当调整时磁贴的 AutoSize 是选定且不能更改的。</value>
+  </data>
+  <data name="TileOverflow_Hidden" xml:space="preserve">
+    <value>对于超出内容，采取隐藏裁剪方式</value>
+  </data>
+  <data name="TileOverflow_Resize" xml:space="preserve">
+    <value>当内容超出时，将会请求是否允许在超出最大高度。（未使用）</value>
+  </data>
+  <data name="TileOverflow_Scale" xml:space="preserve">
+    <value>当内容超出时，将会按比例缩放到合适高度。</value>
+  </data>
+  <data name="TileOverflow_Scroll" xml:space="preserve">
+    <value>对于超出内容，将启动滚动条</value>
+  </data>
+</root>

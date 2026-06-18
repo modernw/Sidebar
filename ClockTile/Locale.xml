@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <resource id="OPTIONS_TAG_ALARM">
+    <lang name="zh-CN">闹钟</lang>
+    <lang name="en-US">Alarm</lang>
+  </resource>
+  <resource id="OPTIONS_ALARM_SET">
+    <lang name="zh-CN">闹铃设置在</lang>
+    <lang name="en-US">Alarm is set for</lang>
+  </resource>
+  <resource id="OPTIONS_ALARM_REPEAT">
+    <lang name="zh-CN">每天都重复闹铃</lang>
+    <lang name="en-US">Repeat every day</lang>
+  </resource>
+  <resource id="OPTIONS_ALARM_STP">
+    <lang name="zh-CN">播放铃声</lang>
+    <lang name="en-US">Song to play</lang>
+  </resource>
+  <resource id="OPTIONS_ALARM_VOLUME">
+    <lang name="zh-CN">音量</lang>
+    <lang name="en-US">Volume</lang>
+  </resource>
+  <resource id="OPTIONS_ALARM_MSG">
+    <lang name="zh-CN">消息</lang>
+    <lang name="en-US">Message</lang>
+  </resource>
+  <resource id="OPTIONS_TAG_FACES">
+    <lang name="zh-CN">面板</lang>
+    <lang name="en-US">Faces</lang>
+  </resource>
+  <resource id="OPTIONS_FACES_CL">
+    <lang name="zh-CN">时钟布局</lang>
+    <lang name="en-US">Clock layout</lang>
+  </resource>
+  <resource id="OPTIONS_TAG_INTER">
+    <lang name="zh-CN">世界时间</lang>
+    <lang name="en-US">International</lang>
+  </resource>
+  <resource id="OPTIONS_INTER_TZ">
+    <lang name="zh-CN">时区</lang>
+    <lang name="en-US">Time Zone</lang>
+  </resource>
+  <resource id="OPTIONS_INTER_LOCAL">
+    <lang name="zh-CN">本地时间</lang>
+    <lang name="en-US">Local</lang>
+  </resource>
+  <resource id="OPTIONS_INTER_CTZ">
+    <lang name="zh-CN">更改时区设置</lang>
+    <lang name="en-US">Change time zone...</lang>
+  </resource>
+  <resource id="OPTIONS_INTER_INTER">
+    <lang name="zh-CN">世界时间</lang>
+    <lang name="en-US">International</lang>
+  </resource>
+  <resource id="FORMAT_MD_HMT">
+    <lang name="zh-CN">HH:mm, M月d日</lang>
+    <lang name="en-US">h:mm tt, MMM d</lang>
+  </resource>
+  <resource id="FORMAT_YMD">
+    <lang name="zh-CN">yyyy年M月d日</lang>
+    <lang name="en-US">MMM d, yyyy</lang>
+  </resource>
+  <resource id="ERROR_NEEDRING">
+    <lang name="zh-CN">错误：请为闹铃设置铃声。</lang>
+    <lang name="en-US">Error: Please set the song for the alarm.</lang>
+  </resource>
+  <resource id="ERROR_LAYOUTNOTSET">
+    <lang name="zh-CN">错误：请设置有效的时钟布局样式。</lang>
+    <lang name="en-US">Error: Please set a valid clock layout style.</lang>
+  </resource>
+  <resource id="ERROR_INVALIDTIMEZONE">
+    <lang name="zh-CN">错误：请设置一个有效的时区。</lang>
+    <lang name="en-US">Error: Please set a valid time zone.</lang>
+  </resource>
+  <resource id="TILE_PROP_DISPNAME">
+    <lang name="zh-CN">时钟</lang>
+    <lang name="en-US">Clock</lang>
+  </resource>
+  <resource id="TILE_PROP_DESC">
+    <lang name="zh-CN">查看你所在的时区或自定义时区的时间和日期。除此之外，还可以设置一个简单的闹铃。</lang>
+    <lang name="en-US">View the time and date of your time zone or a custom time zone. In addition, you can also set a simple alarm.</lang>
+  </resource>
+</resources>

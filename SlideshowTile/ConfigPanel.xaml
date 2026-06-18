@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="WindowsModern.SlideshowTile.ConfigPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WindowsModern.SlideshowTile"
+             mc:Ignorable="d" Loaded="UserControl_Loaded"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+		<ScrollViewer Background="White" Padding="10,10,10,10" VerticalScrollBarVisibility="Auto">
+			<StackPanel>
+				<GroupBox Name="GroupPicSrc" Header="Picture Source">
+					<Grid Margin="5,5,5,5">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="Auto"/>
+						</Grid.ColumnDefinitions>
+						<ListBox Name="ListPictureSource" Grid.Column="0" MaxHeight="150" MinHeight="20" MinWidth="100"></ListBox>
+						<StackPanel Grid.Column="1" Margin="5,0,0,0">
+							<Button Name="BtnAddItem" Margin="0,0,0,5" Padding="5,3,5,3" Click="BtnAddItem_Click">Add</Button>
+							<Button Name="BtnRemoveItem" Margin="0,0,0,5" Padding="5,3,5,3" Click="BtnRemoveItem_Click">Remove</Button>
+							<Button Name="BtnMoveUp" Margin="0,0,0,5" Padding="5,3,5,3" Click="BtnMoveUp_Click">Move Up</Button>
+							<Button Name="BtnMoveDown" Margin="0,0,0,0" Padding="5,3,5,3" Click="BtnMoveDown_Click">Move Down</Button>
+						</StackPanel>
+					</Grid>
+				</GroupBox>
+				<StackPanel>
+					<CheckBox Name="InputIncludeSubDir" Margin="0,10,0,10">Include Sub Directory</CheckBox>
+					<TextBlock Name="LabelCycleDelay" Margin="0,0,0,5">Cycle Delay</TextBlock>
+					<ComboBox Name="SelectCycleDelay"></ComboBox>
+					<CheckBox Name="InputRandomPlay" Margin="0,10,0,0">Random Play</CheckBox>
+				</StackPanel>
+			</StackPanel>
+		</ScrollViewer>
+    </Grid>
+</UserControl>

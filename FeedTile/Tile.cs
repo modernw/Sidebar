@@ -1,0 +1,701 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Collections.ObjectModel;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
+using System.Runtime.InteropServices;
+using Microsoft.Feeds.Interop;
+using Sidebar;
+using System.IO;
+using Newtonsoft.Json;
+
+namespace WindowsModern.FeedTile
+{
+	public class Tile: TileBase
+	{
+		public static IProgramFolder TileFolder { get; private set; }
+		public static ISidebarFeatures SidebarFeatures { get; private set; }
+		public static IFeedsManager FeedMgr { get; set; }
+		public static TileOptions Options { get; private set; }
+		public static TileBase TileInstance { get; private set; }
+		public static ObservableCollection<FeedData> Feeds { get; } = new ObservableCollection<FeedData> ();
+		public static ObservableCollection<FeedItemData> AllItems { get; } = new ObservableCollection<FeedItemData> ();
+
+		private TilePanel tilePanel = null;
+		private Timer _refreshTimer;
+		private Timer _refreshDebounceTimer;
+		private CancellationTokenSource _activeRefreshCts;
+		private Thread _activeRefreshThread;
+		private bool _refreshPending = false;
+		private bool _isRefreshing = false;
+		private readonly object _refreshControlLock = new object ();
+
+		private const string CACHE_FILENAME = "FeedCache.json";
+		private const int MAX_CACHE_ITEMS = 40;
+		private TileBaseEventRouter router = null;
+
+		/// <summary>
+		/// 公开只读属性，指示是否正在进行刷新操作
+		/// </summary>
+		public static bool IsRefreshing
+		{
+			get
+			{
+				Tile tile = TileInstance as Tile;
+				if (tile != null)
+				{
+					lock (tile._refreshControlLock)
+					{
+						return tile._isRefreshing;
+					}
+				}
+				return false;
+			}
+		}
+
+		public override void OnInitialize ()
+		{
+			TileInstance = this;
+			TileFolder = Region;
+			SidebarFeatures = Features;
+			Options = new TileOptions (Config);
+			router = new TileEventRouter (this);
+			var panel = TileUI as Panel;
+			tilePanel = new TilePanel ();
+			panel.Children.Add (tilePanel);
+			Type feedMgrType = Type.GetTypeFromProgID ("Microsoft.FeedsManager");
+			if (feedMgrType != null)
+				FeedMgr = (IFeedsManager)Activator.CreateInstance (feedMgrType);
+			LoadCacheAndDisplay ();
+			Options.PropertyChanged += Options_PropertyChanged;
+
+			// 立即启动首次刷新（不 debounce）
+			RequestRefresh (debounceDelayMs: 0);
+
+			// 启动定时器，每 30 分钟触发一次刷新请求
+			_refreshTimer = new Timer (_ => RequestRefresh (), null, TimeSpan.FromMinutes (30), TimeSpan.FromMinutes (30));
+		}
+
+		private void Options_PropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			switch (e.PropertyName)
+			{
+				case nameof (Options.SourceType):
+				case nameof (Options.FeedList):
+					// 选项变化时触发刷新
+					RequestRefresh ();
+					break;
+			}
+		}
+
+		public override void OnDestroy ()
+		{
+			// 停止定时器
+			_refreshTimer?.Dispose ();
+			_refreshTimer = null;
+
+			// 取消所有正在进行的刷新操作
+			lock (_refreshControlLock)
+			{
+				_refreshPending = false;
+
+				// 停止 debounce 定时器
+				if (_refreshDebounceTimer != null)
+				{
+					_refreshDebounceTimer.Dispose ();
+					_refreshDebounceTimer = null;
+				}
+
+				// 取消活跃的刷新操作
+				if (_activeRefreshCts != null)
+				{
+					_activeRefreshCts.Cancel ();
+					_activeRefreshCts.Dispose ();
+					_activeRefreshCts = null;
+				}
+
+				// 等待活跃线程结束
+				if (_activeRefreshThread != null && _activeRefreshThread.IsAlive)
+				{
+					_activeRefreshThread.Join (2000);
+				}
+				_activeRefreshThread = null;
+
+				_isRefreshing = false;
+			}
+
+			// 在取消后台线程之前，先保存当前显示的缓存（如果 UserRegion 可用）
+			if (UserRegion != null && AllItems.Count > 0)
+			{
+				try
+				{
+					var currentItems = AllItems.ToList ();
+					SaveCache (currentItems);
+				}
+				catch (Exception ex)
+				{
+					System.Diagnostics.Debug.WriteLine ($"Save cache on destroy error: {ex.Message}");
+				}
+			}
+
+			if (TileFeedItem.DetailPanel != null)
+			{
+				Panel detailParent = TileFeedItem.DetailPanel.Parent as Panel;
+				if (detailParent != null && detailParent.Children != null)
+				{
+					detailParent.Children.Clear ();
+				}
+			}
+			TileFeedItem.DetailPanel = null;
+
+			if (tilePanel != null)
+			{
+				Panel tilePanelParent = tilePanel.Parent as Panel;
+				if (tilePanelParent != null && tilePanelParent.Children != null)
+				{
+					tilePanelParent.Children.Clear ();
+				}
+			}
+			tilePanel = null;
+
+			if (router != null)
+			{
+				router.Dispose ();
+			}
+			router = null;
+
+			Options.PropertyChanged -= Options_PropertyChanged;
+			ReleaseComObject (FeedMgr);
+			FeedMgr = null;
+			TileFolder = null;
+			SidebarFeatures = null;
+			Options = null;
+			TileInstance = null;
+
+			Feeds?.Clear ();
+			AllItems?.Clear ();
+		}
+
+		public override bool OnResponse (ITileResponse resp)
+		{
+			if (resp.ResponseSource == "Sidebar")
+			{
+				switch (resp.ResponseName)
+				{
+					case "ExtraFlyoutWindow":
+						if (resp != null && resp.TransferDatas is FeedArticlePanel)
+						{
+							var fw = resp.ResponseData as FlyoutAboutEventArgs;
+							fw.Window.AllowsTransparency = false;
+							var panel = fw != null ? fw.FlyoutUI as Panel : null;
+							fw.Window.Width = 377;
+							fw.Window.Height = 300;
+							fw.Window.Show ();
+							var browserWindow = resp.TransferDatas as FeedArticlePanel;
+							if (fw.ClientArea != null)
+							{
+								fw.ClientArea.Children.Add (browserWindow);
+							}
+							EventHandler closeHandler = null;
+							closeHandler = (s, e) => {
+								Panel browserWindowParent = browserWindow != null ? browserWindow.Parent as Panel : null;
+								if (browserWindowParent != null && browserWindowParent.Children != null)
+								{
+									browserWindowParent.Children.Clear ();
+								}
+								if (browserWindow != null)
+								{
+									browserWindow.ClearPage ();
+								}
+								fw.Window.Closed -= closeHandler;
+							};
+							fw.Window.Closed += closeHandler;
+							return true;
+						}
+						break;
+				}
+			}
+			return false;
+		}
+
+		class TileEventRouter: TileBaseEventRouter
+		{
+			private FlyoutPanel flyoutPanel = null;
+			private PropertiesPanel propPanel = null;
+			public TileEventRouter (TileBase tb) : base (tb) { }
+			public override void FlyoutForm_Init (object sender, FlyoutAboutEventArgs e)
+			{
+				e.Window.SizeToContent = SizeToContent.Height;
+				if (flyoutPanel == null) flyoutPanel = new FlyoutPanel ();
+				(flyoutPanel?.Parent as Panel)?.Children?.Clear ();
+				e.ClientArea.Children.Add (flyoutPanel);
+			}
+			public override void FlyoutForm_Loaded (object sender, FlyoutAboutEventArgs e)
+			{
+				e.Window.UpdateLayout ();
+				e.Window.MaxHeight = Math.Min (721, (SidebarFeatures.Config.CurrentScreen.WorkingArea.Height / SidebarFeatures.Config.CurrentScreen.GetDPI ()) - e.Window.Top);
+				e.FlyoutWindowFeatures.FixPosition ();
+			}
+			public override void FlyoutForm_Closed (object sender, EventArgs e)
+			{
+				(flyoutPanel?.Parent as Panel)?.Children?.Clear ();
+			}
+			public override void PropertiesForm_Init (object sender, PropertiesAboutEventArgs e)
+			{
+				if (propPanel == null) propPanel = new PropertiesPanel ();
+				e.ClientArea.Children.Add (propPanel);
+				e.Window.SizeToContent = SizeToContent.WidthAndHeight;
+			}
+			public override void PropertiesForm_Closed (object sender, EventArgs e)
+			{
+				Panel propPanelParent = propPanel != null ? propPanel.Parent as Panel : null;
+				if (propPanelParent != null && propPanelParent.Children != null)
+				{
+					propPanelParent.Children.Clear ();
+				}
+				propPanel = null;
+			}
+			public override void PropertiesForm_ClickOK (object sender, PropertiesAboutEventArgs e)
+			{
+				if (propPanel != null)
+				{
+					propPanel.OnSave ();
+				}
+			}
+			public override void Router_WillDestroy ()
+			{
+				Panel propPanelParent = propPanel != null ? propPanel.Parent as Panel : null;
+				if (propPanelParent != null && propPanelParent.Children != null)
+				{
+					propPanelParent.Children.Clear ();
+				}
+				propPanel = null;
+			}
+		}
+		public static void MarkItemAsRead (string feedPath, string localId)
+		{
+			if (FeedMgr == null) return;
+			if (string.IsNullOrEmpty (feedPath) || string.IsNullOrEmpty (localId)) return;
+
+			try
+			{
+				IFeed feed = null;
+				IFeedItem item = null;
+				try
+				{
+					feed = FeedMgr.GetFeed (feedPath);
+					if (feed == null) return;
+					int id;
+					if (!int.TryParse (localId, out id)) return;
+					item = feed.GetItem (id);
+					if (item != null && !item.IsRead)
+					{
+						item.IsRead = true;
+						System.Diagnostics.Debug.WriteLine ($"Marked as read: {feedPath} / {localId}");
+					}
+				}
+				finally
+				{
+					if (item != null) Marshal.ReleaseComObject (item);
+					if (feed != null) Marshal.ReleaseComObject (feed);
+				}
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine ($"Error marking item as read: {ex.Message}");
+			}
+		}
+		private void LoadCacheAndDisplay ()
+		{
+			if (UserRegion == null) return; // 没有用户目录则不使用缓存
+
+			try
+			{
+				string cachePath = Path.Combine (UserRegion.FolderPath, CACHE_FILENAME);
+				if (File.Exists (cachePath))
+				{
+					string json = File.ReadAllText (cachePath);
+					var cachedItems = JsonConvert.DeserializeObject<List<FeedItemData>> (json);
+					if (cachedItems != null && cachedItems.Count > 0)
+					{
+						if (Application.Current != null)
+						{
+							Application.Current.Dispatcher.Invoke (new Action (() => {
+								AllItems.Clear ();
+								foreach (var item in cachedItems.Take (MAX_CACHE_ITEMS))
+									AllItems.Add (item);
+							}));
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine ($"Load cache error: {ex.Message}");
+			}
+		}
+
+		private void SaveCache (List<FeedItemData> items)
+		{
+			if (UserRegion == null) return; // 没有用户目录则不保存缓存
+
+			try
+			{
+				var toSave = items.Take (MAX_CACHE_ITEMS).ToList ();
+				string json = JsonConvert.SerializeObject (toSave, new JsonSerializerSettings {
+					ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+				});
+				string cachePath = Path.Combine (UserRegion.FolderPath, CACHE_FILENAME);
+				File.WriteAllText (cachePath, json);
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine ($"Save cache error: {ex.Message}");
+			}
+		}
+
+		/// <summary>
+		/// 统一的刷新请求入口，支持 debounce、唯一性和中断重启
+		/// </summary>
+		/// <param name="debounceDelayMs">防抖延迟（毫秒），0 表示立即执行</param>
+		public void RequestRefresh (int debounceDelayMs = 500)
+		{
+			lock (_refreshControlLock)
+			{
+				_refreshPending = true;
+
+				// 停止现有的 debounce 定时器
+				if (_refreshDebounceTimer != null)
+				{
+					_refreshDebounceTimer.Dispose ();
+					_refreshDebounceTimer = null;
+				}
+
+				// 取消正在进行的刷新
+				if (_activeRefreshCts != null)
+				{
+					_activeRefreshCts.Cancel ();
+					_activeRefreshCts.Dispose ();
+					_activeRefreshCts = null;
+				}
+
+				if (debounceDelayMs == 0)
+				{
+					// 立即执行
+					DoRefresh ();
+				}
+				else
+				{
+					// 启动 debounce 定时器
+					_refreshDebounceTimer = new Timer (_ => DoRefresh (), null, debounceDelayMs, Timeout.Infinite);
+				}
+			}
+		}
+
+		/// <summary>
+		/// 执行实际的刷新操作（在锁内调用）
+		/// </summary>
+		private void DoRefresh ()
+		{
+			lock (_refreshControlLock)
+			{
+				// 停止 debounce 定时器
+				if (_refreshDebounceTimer != null)
+				{
+					_refreshDebounceTimer.Dispose ();
+					_refreshDebounceTimer = null;
+				}
+
+				// 如果没有待处理的刷新请求，退出
+				if (!_refreshPending)
+					return;
+
+				_refreshPending = false;
+
+				// 创建新的取消令牌源
+				_activeRefreshCts = new CancellationTokenSource ();
+				var cts = _activeRefreshCts;
+
+				// 启动新的刷新线程
+				_activeRefreshThread = new Thread (() => {
+					try
+					{
+						lock (_refreshControlLock)
+						{
+							_isRefreshing = true;
+						}
+
+						RefreshFeedsFull (cts.Token);
+					}
+					catch (OperationCanceledException)
+					{
+						System.Diagnostics.Debug.WriteLine ("Refresh canceled by new request.");
+					}
+					catch (Exception ex)
+					{
+						System.Diagnostics.Debug.WriteLine ($"Refresh error: {ex.Message}");
+					}
+					finally
+					{
+						lock (_refreshControlLock)
+						{
+							_isRefreshing = false;
+							// 只清理当前的 CTS，如果已经被新线程替换则不清理
+							if (_activeRefreshCts == cts)
+							{
+								_activeRefreshCts = null;
+							}
+							if (cts != null)
+							{
+								cts.Dispose ();
+							}
+						}
+					}
+				});
+
+				_activeRefreshThread.SetApartmentState (ApartmentState.STA);
+				_activeRefreshThread.Start ();
+			}
+		}
+
+		/// <summary>
+		/// 公开方法：请求刷新（默认 500ms debounce）
+		/// </summary>
+		public void RefreshFeeds ()
+		{
+			RequestRefresh (debounceDelayMs: 500);
+		}
+
+		private void RefreshFeedsFull (CancellationToken cancellationToken)
+		{
+			IFeedsManager localFeedMgr = null;
+			Type feedMgrType = Type.GetTypeFromProgID ("Microsoft.FeedsManager");
+			if (feedMgrType != null)
+				localFeedMgr = (IFeedsManager)Activator.CreateInstance (feedMgrType);
+			if (localFeedMgr == null)
+			{
+				System.Diagnostics.Debug.WriteLine ("Cannot create local FeedsManager.");
+				return;
+			}
+
+			try
+			{
+				var allFeedsDict = new Dictionary<string, FeedData> ();
+				var allItemsList = new List<FeedItemData> ();
+
+				// 收集所有源（异常已在内部处理）
+				CollectAllFeeds (localFeedMgr.RootFolder, allFeedsDict, allItemsList, cancellationToken);
+
+				if (cancellationToken.IsCancellationRequested) return;
+
+				// 根据用户设置过滤源
+				IEnumerable<FeedData> filteredFeeds;
+				if (Options.SourceType == FeedSource.Selected && Options.FeedList != null && Options.FeedList.Count > 0)
+				{
+					var selectedPaths = new HashSet<string> (Options.FeedList);
+					filteredFeeds = allFeedsDict.Values.Where (f => selectedPaths.Contains (f.Path));
+				}
+				else
+				{
+					filteredFeeds = allFeedsDict.Values;
+				}
+
+				// 排序并取前 ShowCountLimit 条
+				var finalItems = filteredFeeds
+					.SelectMany (f => f.Items)
+					.OrderByDescending (item => item.PublishDate)
+					.Take (100)
+					.ToList ();
+
+				var feedsList = allFeedsDict.Values.ToList ();
+
+				if (Application.Current != null)
+				{
+					Application.Current.Dispatcher.Invoke (new Action (() => {
+						UpdateCollectionWithDiff (Feeds, feedsList, (old, newE) => old.Path == newE.Path);
+						UpdateCollectionWithDiff (AllItems, finalItems, (old, newE) => old.LocalId == newE.LocalId && old.Parent != null && newE.Parent != null && old.Parent.Path == newE.Parent.Path, true);
+					}));
+				}
+
+				// 保存缓存（仅当 UserRegion 存在）
+				SaveCache (finalItems);
+			}
+			finally
+			{
+				if (localFeedMgr != null)
+					ReleaseComObject (localFeedMgr);
+			}
+		}
+
+		private void CollectAllFeeds (IFeedFolder folder, Dictionary<string, FeedData> feedsDict, List<FeedItemData> allItemsList, CancellationToken cancellationToken)
+		{
+			if (folder == null) return;
+
+			IFeedsEnum feedsEnum = null;
+			try
+			{
+				feedsEnum = (IFeedsEnum)folder.Feeds;
+				for (int i = 0; i < feedsEnum.Count; i++)
+				{
+					cancellationToken.ThrowIfCancellationRequested ();
+
+					IFeed feed = null;
+					try
+					{
+						feed = (IFeed)feedsEnum.Item (i);
+						if (feed == null) continue;
+
+						var feedData = LoadFeedData (feed);
+						if (feedData != null)
+						{
+							feedsDict [feedData.Path] = feedData;
+							allItemsList.AddRange (feedData.Items);
+						}
+					}
+					catch (Exception ex)
+					{
+						System.Diagnostics.Debug.WriteLine ($"Error processing feed item {i}: {ex.Message}");
+						// 吞掉异常，继续下一个源
+					}
+					finally
+					{
+						if (feed != null) ReleaseComObject (feed);
+					}
+				}
+			}
+			finally
+			{
+				if (feedsEnum != null) ReleaseComObject (feedsEnum);
+			}
+
+			IFeedsEnum subFoldersEnum = null;
+			try
+			{
+				subFoldersEnum = (IFeedsEnum)folder.Subfolders;
+				for (int i = 0; i < subFoldersEnum.Count; i++)
+				{
+					cancellationToken.ThrowIfCancellationRequested ();
+
+					IFeedFolder subFolder = null;
+					try
+					{
+						subFolder = (IFeedFolder)subFoldersEnum.Item (i);
+						CollectAllFeeds (subFolder, feedsDict, allItemsList, cancellationToken);
+					}
+					catch (Exception ex)
+					{
+						System.Diagnostics.Debug.WriteLine ($"Error processing subfolder {i}: {ex.Message}");
+						// 吞掉异常，继续下一个子文件夹
+					}
+					finally
+					{
+						if (subFolder != null) ReleaseComObject (subFolder);
+					}
+				}
+			}
+			finally
+			{
+				if (subFoldersEnum != null) ReleaseComObject (subFoldersEnum);
+			}
+		}
+
+		private FeedData LoadFeedData (IFeed feed)
+		{
+			if (feed == null) return null;
+
+			var feedData = new FeedData {
+				Title = feed.Name ?? "",
+				Description = feed.Description ?? "",
+				Link = feed.Link ?? "",
+				Url = feed.Url ?? "",
+				UnreadCount = feed.UnreadItemCount,
+				Path = feed.Path ?? ""
+			};
+
+			IFeedsEnum itemsEnum = null;
+			try
+			{
+				itemsEnum = (IFeedsEnum)feed.Items;
+				for (int j = 0; j < itemsEnum.Count; j++)
+				{
+					IFeedItem item = null;
+					try
+					{
+						item = (IFeedItem)itemsEnum.Item (j);
+						if (item == null) continue;
+
+						DateTime pubDate = item.PubDate;
+						if (pubDate == DateTime.MinValue || pubDate.Year == 1899)
+							pubDate = item.Modified;
+
+						var itemData = new FeedItemData {
+							Title = item.Title ?? "",
+							Description = item.Description ?? "",
+							Link = item.Link ?? "",
+							LocalId = item.LocalId.ToString (),
+							IsRead = item.IsRead,
+							PublishDate = pubDate,
+							Parent = feedData
+						};
+						feedData.Items.Add (itemData);
+					}
+					catch (Exception ex)
+					{
+						System.Diagnostics.Debug.WriteLine ($"Error reading feed item {j} in feed {feedData.Path}: {ex.Message}");
+						// 吞掉异常，继续下一个条目
+					}
+					finally
+					{
+						if (item != null) ReleaseComObject (item);
+					}
+				}
+			}
+			finally
+			{
+				if (itemsEnum != null) ReleaseComObject (itemsEnum);
+			}
+
+			return feedData;
+		}
+
+		private void UpdateCollectionWithDiff<T> (ObservableCollection<T> target, IList<T> newList, Func<T, T, bool> areEqual, bool maintainOrder = true)
+		{
+			if (target == null) return;
+
+			// 删除不存在于新列表中的项
+			for (int i = target.Count - 1; i >= 0; i--)
+			{
+				var oldItem = target [i];
+				if (!newList.Any (newItem => areEqual (oldItem, newItem)))
+					target.RemoveAt (i);
+			}
+
+			// 添加新项或调整顺序
+			for (int i = 0; i < newList.Count; i++)
+			{
+				var newItem = newList [i];
+				int existingIndex = -1;
+				for (int j = 0; j < target.Count; j++)
+				{
+					if (areEqual (target [j], newItem))
+					{
+						existingIndex = j;
+						break;
+					}
+				}
+				if (existingIndex == -1)
+					target.Insert (i, newItem);
+				else if (maintainOrder && existingIndex != i)
+					target.Move (existingIndex, i);
+			}
+		}
+
+		private static void ReleaseComObject (object obj)
+		{
+			if (obj != null && Marshal.IsComObject (obj))
+				Marshal.ReleaseComObject (obj);
+		}
+	}
+}

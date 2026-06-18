@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="WindowsModern.PowerTile.TilePanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WindowsModern.PowerTile"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Loaded="UserControl_Loaded" SizeChanged="UserControl_SizeChanged">
+    <Grid Margin="6,4,6,4">
+		<StackPanel Orientation="Horizontal">
+			<Image Name="PowerIcon" Width="40" Height="40" RenderOptions.BitmapScalingMode="HighQuality"/>
+			<Grid Width="10" Height="10" />
+			<StackPanel Name="TextPart" VerticalAlignment="Center" Orientation="Vertical">
+				<TextBlock FontSize="14" Name="VolumeDisplay" TextWrapping="Wrap">
+					<Run Name="BatteryVolume" Text="0"/>
+					<Run Text="%" />
+				</TextBlock>
+				<TextBlock Name="ACDisplay" Visibility="Collapsed" TextWrapping="Wrap">
+				</TextBlock>
+				<TextBlock Name="StatusText" Margin="0,3,0,0" TextWrapping="Wrap"></TextBlock>
+			</StackPanel>
+		</StackPanel>
+    </Grid>
+</UserControl>

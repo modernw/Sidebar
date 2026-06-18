@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <resource id="SIDEBAR_TITLE">
+    <lang name="zh-CN">边栏</lang>
+    <lang name="en-US">Sidebar</lang>
+  </resource>
+  <resource id="SIDEBAR_CONTEXTMENU_MINBAR">
+    <lang name="zh-CN">最小化边栏</lang>
+    <lang name="en-US">Minimize bar</lang>
+  </resource>
+  <resource id="SIDEBAR_CONTEXTMENU_PROP">
+    <lang name="zh-CN">属性</lang>
+    <lang name="en-US">Properties</lang>
+  </resource>
+  <resource id="SIDEBAR_CONTEXTMENU_TILEMGR">
+    <lang name="zh-CN">管理磁贴...</lang>
+    <lang name="en-US">Manage tiles...</lang>
+  </resource>
+  <resource id="SIDEBAR_CONTEXTMENU_ADDTILE">
+    <lang name="zh-CN">添加磁贴...</lang>
+    <lang name="en-US">Add a tile...</lang>
+  </resource>
+  <resource id="SIDEBAR_CONTEXTMENU_CANCEL">
+    <lang name="zh-CN">关闭 边栏</lang>
+    <lang name="en-US">Cancel Sidebar</lang>
+  </resource>
+  <resource id="SIDEBAR_CONTEXTMENU_SHOW">
+    <lang name="zh-CN">显示 边栏</lang>
+    <lang name="en-US">Show Sidebar</lang>
+  </resource>
+  <resource id="TILEMGR_WINTITLE">
+    <lang name="zh-CN">磁贴管理器</lang>
+    <lang name="en-US">Tiles Manager</lang>
+  </resource>
+  <resource id="TILEMGR_SELECTAITEM">
+    <lang name="zh-CN">请在左侧选择一个项，可以对该磁贴进行管理。</lang>
+    <lang name="en-US">Please select a item from left side, and you can manage the tile.</lang>
+  </resource>
+  <resource id="TILEMGR_ADDTO">
+    <lang name="zh-CN">添加到边栏</lang>
+    <lang name="en-US">Add to Sidebar</lang>
+  </resource>
+  <resource id="TILEMGR_REMOVE">
+    <lang name="zh-CN">取消固定磁贴</lang>
+    <lang name="en-US">Unpin Tile</lang>
+  </resource>
+  <resource id="TILEMGR_DELETE">
+    <lang name="zh-CN">删除小工具</lang>
+    <lang name="en-US">Delete Gadget</lang>
+  </resource>
+  <resource id="TILEMGR_PINNEDFAILED">
+    <lang name="zh-CN">磁贴已经固定在边栏上。</lang>
+    <lang name="en-US">This tile is already added to the sidebar.</lang>
+  </resource>
+  <resource id="TILEMGR_PINNEDFAILED_TITLE">
+    <lang name="zh-CN">磁贴已经添加</lang>
+    <lang name="en-US">Already Added</lang>
+  </resource>
+  <resource id="TILEMGR_DELETEASK">
+    <lang name="zh-CN">确定要删除小工具吗？
+这将会取消固定并将小工具相应的文件移动到回收站。</lang>
+    <lang name="en-US">Are you sure you want to delete the gadget?
+This will unpin it and move the gadget's files to the Recycle Bin.</lang>
+  </resource>
+  <resource id="TILEMGR_DELETEASK_TITLE">
+    <lang name="zh-CN">删除小工具</lang>
+    <lang name="en-US">Delete Gadget</lang>
+  </resource>
+  <resource id="TILEMGR_DELETEFAILED">
+    <lang name="zh-CN">删除文件时出现异常，可能需要手动删除文件夹“{0}”。
+错误信息：
+{1}</lang>
+    <lang name="en-US">An error occurred while deleting a file. You may need to manually delete the folder "{0}".
+Error message:
+{1}</lang>
+  </resource>
+  <resource id="TILEMGR_DELETEFAILED_TITLE">
+    <lang name="zh-CN">删除失败</lang>
+    <lang name="en-US">Delete Failed</lang>
+  </resource>
+  <resource id="TILE_CONTEXTMENU_AUTOSIZE">
+    <lang name="zh-CN">自动调整尺寸</lang>
+    <lang name="en-US">Auto Size</lang>
+  </resource>
+  <resource id="TILE_CONTEXTMENU_PIN">
+    <lang name="zh-CN">固定到底部</lang>
+    <lang name="en-US">Pin to Bottom</lang>
+  </resource>
+  <resource id="TILE_CONTEXTMENU_MOVEUP">
+    <lang name="zh-CN">上移</lang>
+    <lang name="en-US">Move Up</lang>
+  </resource>
+  <resource id="TILE_CONTEXTMENU_MOVEDOWN">
+    <lang name="zh-CN">下移</lang>
+    <lang name="en-US">Move Down</lang>
+  </resource>
+  <resource id="TILE_CONTEXTMENU_PROP">
+    <lang name="zh-CN">属性</lang>
+    <lang name="en-US">Properties</lang>
+  </resource>
+  <resource id="TILE_CONTEXTMENU_REMOVE">
+    <lang name="zh-CN">移除磁贴</lang>
+    <lang name="en-US">Remove Tile</lang>
+  </resource>
+  <resource id="TILEPROPERTIES_TITLE">
+    <lang name="zh-CN">{0} 属性</lang>
+    <lang name="en-US">{0} Properties</lang>
+  </resource>
+  <resource id="TILEPROPERTIES_OK">
+    <lang name="zh-CN">确定</lang>
+    <lang name="en-US">OK</lang>
+  </resource>
+  <resource id="TILEPROPERTIES_CANCEL">
+    <lang name="zh-CN">取消</lang>
+    <lang name="en-US">Cancel</lang>
+  </resource>
+  <resource id="SIDEBAR_OPTIONS">
+    <lang name="zh-CN">选项</lang>
+    <lang name="en-US">Options</lang>
+  </resource>
+  <resource id="CONFIG_AUTORUN">
+    <lang name="zh-CN">开机自动启动边栏</lang>
+    <lang name="en-US">Autostart Sidebar</lang>
+  </resource>
+  <resource id="CONFIG_LOCK">
+    <lang name="zh-CN">锁定边栏，不再调整宽度</lang>
+    <lang name="en-US">Lock the sidebar and disable width adjustment</lang>
+  </resource>
+  <resource id="CONFIG_TOPMOST">
+    <lang name="zh-CN">在所有窗口上方显示</lang>
+    <lang name="en-US">Always on top</lang>
+  </resource>
+  <resource id="CONFIG_APPBAR">
+    <lang name="zh-CN">裁剪桌面工作区</lang>
+    <lang name="en-US">Clip the desktop working area</lang>
+  </resource>
+  <resource id="CONFIG_OVERLAP">
+    <lang name="zh-CN">覆盖任务栏</lang>
+    <lang name="en-US">Clip the desktop working area</lang>
+  </resource>
+  <resource id="CONFIG_SIDEBARLOC">
+    <lang name="zh-CN">边栏在屏幕中的位置：</lang>
+    <lang name="en-US">Sidebar position on screen:</lang>
+  </resource>
+  <resource id="CONFIG_LOCLEFT">
+    <lang name="zh-CN">左侧</lang>
+    <lang name="en-US">Left</lang>
+  </resource>
+  <resource id="CONFIG_LOCRIGHT">
+    <lang name="zh-CN">右侧</lang>
+    <lang name="en-US">Right</lang>
+  </resource>
+  <resource id="CONFIG_THEME">
+    <lang name="zh-CN">当前主题：</lang>
+    <lang name="en-US">Current theme:</lang>
+  </resource>
+  <resource id="CONFIG_TITLE">
+    <lang name="zh-CN">设置</lang>
+    <lang name="en-US">Configure</lang>
+  </resource>
+  <resource id="ABOUT_TITLE">
+    <lang name="zh-CN">关于</lang>
+    <lang name="en-US">About</lang>
+  </resource>
+  <resource id="CONFIG_REFRESH">
+    <lang name="zh-CN">刷新</lang>
+    <lang name="en-US">Refresh</lang>
+  </resource>
+  <resource id="CONFIG_SCREEN_PRIMARY">
+    <lang name="zh-CN">主屏幕</lang>
+    <lang name="en-US">Primary Screen</lang>
+  </resource>
+  <resource id="CONFIG_SCREEN">
+    <lang name="zh-CN">当前用于显示的屏幕：</lang>
+    <lang name="en-US">Current Display Screen:</lang>
+  </resource>
+  <resource id="CONFIG_GENERAL">
+    <lang name="zh-CN">常规</lang>
+    <lang name="en-US">General</lang>
+  </resource>
+  <resource id="CONFIG_APPEARANCE">
+    <lang name="zh-CN">外观</lang>
+    <lang name="en-US">Appearance</lang>
+  </resource>
+  <resource id="CONFIG_WIDTH">
+    <lang name="zh-CN">边栏宽度</lang>
+    <lang name="en-US">Sidebar Width</lang>
+  </resource>
+  <resource id="CONFIG_SMALL">
+    <lang name="zh-CN">小</lang>
+    <lang name="en-US">Small</lang>
+  </resource>
+  <resource id="CONFIG_MEDIUM">
+    <lang name="zh-CN">中</lang>
+    <lang name="en-US">Medium</lang>
+  </resource>
+  <resource id="CONFIG_LARGE">
+    <lang name="zh-CN">大</lang>
+    <lang name="en-US">Large</lang>
+  </resource>
+  <resource id="CONFIG_CUSTOM">
+    <lang name="zh-CN">自定义</lang>
+    <lang name="en-US">Custom</lang>
+  </resource>
+  <resource id="SIDEBAR_NOTIFY_TITLE">
+    <lang name="zh-CN">来自 {0} 的通知</lang>
+    <lang name="en-US">Notification from {0}</lang>
+  </resource>
+  <resource id="INSTALLER_BTN_NEXT">
+    <lang name="zh-CN">下一步 &gt;</lang>
+    <lang name="en-US">Next &gt;</lang>
+  </resource>
+  <resource id="INSTALLER_BTN_BACK">
+    <lang name="zh-CN">&lt; 上一步</lang>
+    <lang name="en-US">&lt; Back</lang>
+  </resource>
+  <resource id="INSTALLER_BTN_CANCEL">
+    <lang name="zh-CN">取消</lang>
+    <lang name="en-US">Cancel</lang>
+  </resource>
+  <resource id="INSTALLER_BTN_SELECTFILE">
+    <lang name="zh-CN">打开文件</lang>
+    <lang name="en-US">Open File</lang>
+  </resource>
+  <resource id="INSTALLER_BTN_INSTALL">
+    <lang name="zh-CN">安装</lang>
+    <lang name="en-US">Install</lang>
+  </resource>
+  <resource id="INSTALLER_BTN_UPDATE">
+    <lang name="zh-CN">更新</lang>
+    <lang name="en-US">Update</lang>
+  </resource>
+  <resource id="INSTALLER_BTN_REINSTALL">
+    <lang name="zh-CN">重新安装</lang>
+    <lang name="en-US">Reinstall</lang>
+  </resource>
+  <resource id="INSTALLER_SELECTFILE">
+    <lang name="zh-CN">请选择一个有效的包以继续。</lang>
+    <lang name="en-US">Please select a valid package to continue.</lang>
+  </resource>
+  <resource id="INSTALLER_FILETYPE_PKG">
+    <lang name="zh-CN">边栏小工具包 (*.sgpkg, *.sgpkgbundle)</lang>
+    <lang name="en-US">Sidebar Gadget Package (*.sgpkg, *.sgpkgbundle)</lang>
+  </resource>
+  <resource id="INSTALLER_FILETYPE_ALL">
+    <lang name="zh-CN">所有文件 (*.*)</lang>
+    <lang name="en-US">All Files (*.*)</lang>
+  </resource>
+  <resource id="INSTALLER_INFO_PUBLISHER">
+    <lang name="zh-CN">发布者: {0}</lang>
+    <lang name="en-US">Publisher: {0}</lang>
+  </resource>
+  <resource id="INSTALLER_INFO_VERSION">
+    <lang name="zh-CN">版本: {0}</lang>
+    <lang name="en-US">Version: {0}</lang>
+  </resource>
+  <resource id="INSTALLER_INFO_CANINS">
+    <lang name="zh-CN">该小工具可以安装在计算机上</lang>
+    <lang name="en-US">This gadget can be installed on the computer.</lang>
+  </resource>
+  <resource id="INSTALLER_INFO_CANNOTINS">
+    <lang name="zh-CN">该小工具不可以安装在计算机上</lang>
+    <lang name="en-US">This gadget cannot be installed on the computer.</lang>
+  </resource>
+  <resource id="INSTALLER_LOADING">
+    <lang name="zh-CN">请稍候...</lang>
+    <lang name="en-US">Please wait...</lang>
+  </resource>
+  <resource id="INSTALLER_PRE_TITLE_INSTALL">
+    <lang name="zh-CN">要安装这个小工具吗？</lang>
+    <lang name="en-US">Do you want to install this gadget?</lang>
+  </resource>
+  <resource id="INSTALLER_PRE_TITLE_UPDATE">
+    <lang name="zh-CN">要更新这个小工具吗？</lang>
+    <lang name="en-US">Do you want to update this gadget?</lang>
+  </resource>
+  <resource id="INSTALLER_PRE_TITLE_REINSTALL">
+    <lang name="zh-CN">要重新安装这个小工具吗？</lang>
+    <lang name="en-US">Do you want to reinstall this gadget?</lang>
+  </resource>
+  <resource id="INSTALLER_ING_TITLE">
+    <lang name="zh-CN">正在安装...</lang>
+    <lang name="en-US">Installing...</lang>
+  </resource>
+  <resource id="INSTALLER_SUCCESS_TITLE">
+    <lang name="zh-CN">安装成功！</lang>
+    <lang name="en-US">Successfully installed!</lang>
+  </resource>
+  <resource id="INSTALLER_FAILED_TITLE">
+    <lang name="zh-CN">安装失败</lang>
+    <lang name="en-US">Failed to install</lang>
+  </resource>
+  <resource id="INSTALLER_FAILED_REASON">
+    <lang name="zh-CN">原因:</lang>
+    <lang name="en-US">Reason:</lang>
+  </resource>
+  <resource id="INSTALLER_BTN_CLOSE">
+    <lang name="zh-CN">关闭</lang>
+    <lang name="en-US">Cancel</lang>
+  </resource>
+  <resource id="INSTALLER_WNDTITLE">
+    <lang name="zh-CN">小工具安装程序</lang>
+    <lang name="en-US">Sidebar Gadget Installer</lang>
+  </resource>
+</resources>

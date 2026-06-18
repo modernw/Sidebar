@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="ClockTile.FlyoutPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClockTile"
+             mc:Ignorable="d" Loaded="OnLoaded" Unloaded="OnUnloaded"
+             d:DesignHeight="300" d:DesignWidth="300">
+	<Grid Style="{DynamicResource TileClockFlyoutPanel}">
+		<DockPanel LastChildFill="True">
+			<local:Calendar x:Name="DisplayCalendar" DockPanel.Dock="Right"></local:Calendar>
+			<StackPanel DockPanel.Dock="Left" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
+				<local:ClockControl x:Name="DisplayClock" Style="{DynamicResource TileClockFlyoutClock}"></local:ClockControl>
+				<local:ShortTimeText x:Name="DisplayShortTime" IsLarge="True" Style="{DynamicResource TileClockPanelShortTimeText}"></local:ShortTimeText>
+				<TextBlock Name="DisplayAlarm" Style="{DynamicResource TileClockPanelCommonTextFlyout}">
+					<Run Text="♫" />
+					<Run Text=" " />
+					<Run Name="DisplayAlarmTip" Text="" />
+				</TextBlock>
+			</StackPanel>
+		</DockPanel>
+    </Grid>
+</UserControl>

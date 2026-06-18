@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <resource id="TILE_PROP_DISPNAME">
+    <lang name="zh-CN">幻灯片</lang>
+    <lang name="en-US">Slide Show</lang>
+  </resource>
+  <resource id="TILE_PROP_DESC">
+    <lang name="zh-CN">以连续幻灯片方式显示图片。</lang>
+    <lang name="en-US">Show a continuous slide show of your pictures.</lang>
+  </resource>
+  <resource id="OPTIONS_PICSRC">
+    <lang name="zh-CN">图片来源</lang>
+    <lang name="en-US">Picture Source</lang>
+  </resource>
+  <resource id="OPTIONS_PICSRC_ADD">
+    <lang name="zh-CN">添加路径</lang>
+    <lang name="en-US">Add</lang>
+  </resource>
+  <resource id="OPTIONS_PICSRC_REMV">
+    <lang name="zh-CN">移除路径</lang>
+    <lang name="en-US">Remove</lang>
+  </resource>
+  <resource id="OPTIONS_PICSRC_MVUP">
+    <lang name="zh-CN">上移</lang>
+    <lang name="en-US">Move Up</lang>
+  </resource>
+  <resource id="OPTIONS_PICSRC_MVDN">
+    <lang name="zh-CN">下移</lang>
+    <lang name="en-US">Move Down</lang>
+  </resource>
+  <resource id="OPTIONS_SUBDIR">
+    <lang name="zh-CN">包括子文件夹</lang>
+    <lang name="en-US">Include subfolders</lang>
+  </resource>
+  <resource id="OPTIONS_DELAY">
+    <lang name="zh-CN">图片切换时间间隔 (秒):</lang>
+    <lang name="en-US">Image switch interval (seconds):</lang>
+  </resource>
+  <resource id="OPTIONS_RANDOM">
+    <lang name="zh-CN">随机显示图片</lang>
+    <lang name="en-US">Random order</lang>
+  </resource>
+  <resource id="MSG_ERR_LIST_EMPTY">
+    <lang name="zh-CN">错误：列表为空。</lang>
+    <lang name="en-US">Error: list is empty.</lang>
+  </resource>
+  <resource id="MSG_ERR_INVALID_DELAY">
+    <lang name="zh-CN">无效的切换时间间隔。</lang>
+    <lang name="en-US">Invalid cycle delay.</lang>
+  </resource>
+  <resource id="MSG_INFO_FOLDER_EXISTS">
+    <lang name="zh-CN">此文件夹已在列表中。</lang>
+    <lang name="en-US">This folder is already in the list.</lang>
+  </resource>
+  <resource id="MSG_WARN_SELECT_REMOVE">
+    <lang name="zh-CN">请选择要移除的项目。</lang>
+    <lang name="en-US">Please select an item to remove.</lang>
+  </resource>
+  <resource id="MSG_WARN_MOVE_UP">
+    <lang name="zh-CN">无法上移。请选择一个不在顶部的项目。</lang>
+    <lang name="en-US">Cannot move up. Please select an item that is not at the top.</lang>
+  </resource>
+  <resource id="MSG_WARN_MOVE_DOWN">
+    <lang name="zh-CN">无法下移。请选择一个不在底部的项目。</lang>
+    <lang name="en-US">Cannot move down. Please select an item that is not at the bottom.</lang>
+  </resource>
+  <resource id="DLG_SELECT_FOLDER">
+    <lang name="zh-CN">选择要添加为图片来源的文件夹</lang>
+    <lang name="en-US">Select a folder to add as picture source</lang>
+  </resource>
+  <resource id="TITLE_INFO_BOX">
+    <lang name="zh-CN">提示</lang>
+    <lang name="en-US">Info</lang>
+  </resource>
+  <resource id="FLYOUT_BTN_BACK">
+    <lang name="zh-CN">上一张</lang>
+    <lang name="en-US">Back</lang>
+  </resource>
+  <resource id="FLYOUT_BTN_NEXT">
+    <lang name="zh-CN">下一张</lang>
+    <lang name="en-US">Next</lang>
+  </resource>
+  <resource id="FLYOUT_BTN_OPENFILE">
+    <lang name="zh-CN">打开文件</lang>
+    <lang name="en-US">Open File</lang>
+  </resource>
+</resources>

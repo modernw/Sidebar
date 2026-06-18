@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <resource id="TILE_PROP_DISPNAME">
+    <lang name="zh-CN">新闻源</lang>
+    <lang name="en-US">News Feed</lang>
+  </resource>
+  <resource id="TILE_PROP_DESC">
+    <lang name="zh-CN">跟踪最新新闻、运动和娱乐新闻。</lang>
+    <lang name="en-US">Track the latest news, sports, and entertainment headlines.</lang>
+  </resource>
+  <resource id="DETAIL_OPENINBROWSER">
+    <lang name="zh-CN">在浏览器中打开</lang>
+    <lang name="en-US">Open in browser</lang>
+  </resource>
+  <resource id="OPTIONS_FEEDSRC">
+    <lang name="zh-CN">源来源</lang>
+    <lang name="en-US">Feed Source</lang>
+  </resource>
+  <resource id="OPTIONS_FEEDSRC_ALL">
+    <lang name="zh-CN">显示所有源</lang>
+    <lang name="en-US">Show all feeds</lang>
+  </resource>
+  <resource id="OPTIONS_FEEDSRC_SELECTED">
+    <lang name="zh-CN">显示自定义的源</lang>
+    <lang name="en-US">Show selected feeds</lang>
+  </resource>
+  <resource id="OPTIONS_SHOWITEMS">
+    <lang name="zh-CN">显示最近的源的标题数目</lang>
+    <lang name="en-US">Number of recent headlines to show</lang>
+  </resource>
+  <resource id="OPTIONS_AUTOSIZE">
+    <lang name="zh-CN">当自动尺寸模式启用时根据内容自动适应尺寸</lang>
+    <lang name="en-US">Automatically resize tile based on content when Auto Size mode is enabled</lang>
+  </resource>
+  <resource id="OPTIONS_TITLELIMIT">
+    <lang name="zh-CN">启用适应尺寸的项后，限制显示的标题数</lang>
+    <lang name="en-US">Limit number of headlines when auto-resize is enabled</lang>
+  </resource>
+  <resource id="TILE_LOADING">
+    <lang name="zh-CN">正在加载...</lang>
+    <lang name="en-US">Loading...</lang>
+  </resource>
+  <resource id="TILE_NOITEMS">
+    <lang name="zh-CN">没有要显示的源项目。</lang>
+    <lang name="en-US">No feed items to display.</lang>
+  </resource>
+  <resource id="ERROR_MOREITEMS">
+    <lang name="zh-CN">错误：必须选择至少一个源。</lang>
+    <lang name="en-US">Error: At least one feed must be selected.</lang>
+  </resource>
+  <resource id="ERROR_VALUES">
+    <lang name="zh-CN">错误：设置项赋予了不合理的值。</lang>
+    <lang name="en-US">Error: Invalid values in settings.</lang>
+  </resource>
+<resource id="FLYOUT_NOFEEDS">
+    <lang name="zh-CN">无订阅源</lang>
+    <lang name="en-US">No Feeds</lang>
+</resource>
+<resource id="FLYOUT_NOITEMS">
+    <lang name="zh-CN">没有可用的条目</lang>
+    <lang name="en-US">No feed items available.</lang>
+</resource>
+</resources>

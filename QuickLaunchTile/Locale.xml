@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <resource id="TILE_PROP_DISPNAME">
+    <lang name="zh-CN">快速启动</lang>
+    <lang name="en-US">Quick Launch</lang>
+  </resource>
+  <resource id="TILE_PROP_DESC">
+    <lang name="zh-CN">显示系统中快捷启动项（位于快捷启动文件夹中的快捷方式）。</lang>
+    <lang name="en-US">Show system quick launch items (shortcuts in the Quick Launch folder).</lang>
+  </resource>
+</resources>

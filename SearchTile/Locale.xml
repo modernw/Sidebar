@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <resource id="TILE_PROP_DISPNAME">
+    <lang name="zh-CN">搜索</lang>
+    <lang name="en-US">Search</lang>
+  </resource>
+  <resource id="TILE_PROP_DESC">
+    <lang name="zh-CN">搜索您想搜索的内容。</lang>
+    <lang name="en-US">Search for what you want to search for.</lang>
+  </resource>
+  <resource id="PROVIDER_CORPNET">
+    <lang name="zh-CN">公司网络</lang>
+    <lang name="en-US">Corpnet</lang>
+  </resource>
+  <resource id="PROVIDER_HOWDOI">
+    <lang name="zh-CN">我该如何……？</lang>
+    <lang name="en-US">How do I...?</lang>
+  </resource>
+  <resource id="PROVIDER_MYSTUFF">
+    <lang name="zh-CN">我的东西</lang>
+    <lang name="en-US">My Stuff</lang>
+  </resource>
+  <resource id="PROVIDER_MSNSEARCH">
+    <lang name="zh-CN">MSN 搜索</lang>
+    <lang name="en-US">MSN Search</lang>
+  </resource>
+  <resource id="TILE_SEARCHFOR">
+    <lang name="zh-CN">搜索...</lang>
+    <lang name="en-US">Search for...</lang>
+  </resource>
+</resources>

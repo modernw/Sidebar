@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="ClockTile.TimePicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClockTile"
+             mc:Ignorable="d" 
+             d:DesignHeight="60" d:DesignWidth="250">
+	<UserControl.Resources>
+		<Style TargetType="TextBlock">
+			<Setter Property="FontSize" Value="16"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Margin" Value="4,0"/>
+		</Style>
+	</UserControl.Resources>
+	<Grid>
+		<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+			<local:NumberInputBox x:Name="HourSelect"
+									Width="45"/>
+			<TextBlock Name="HourMinuteDivide" Text=":"/>
+			<local:NumberInputBox x:Name="MinuteSelect"
+									Width="45"/>
+			<TextBlock Name="MinuteSecondDivide" Text=":"/>
+			<local:NumberInputBox x:Name="SecondSelect"
+									Width="45"/>
+		</StackPanel>
+	</Grid>
+</UserControl>

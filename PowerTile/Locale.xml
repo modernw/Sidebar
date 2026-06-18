@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <resource id="TILE_PROP_DISPNAME">
+    <lang name="zh-CN">电源</lang>
+    <lang name="en-US">Power</lang>
+  </resource>
+  <resource id="TILE_PROP_DESC">
+    <lang name="zh-CN">显示当前电源一些信息。</lang>
+    <lang name="en-US">Displays some information about the current power supply.</lang>
+  </resource>
+  <resource id="STATUS_ON_BATTERY">
+    <lang name="zh-CN">使用电池中</lang>
+    <lang name="en-US">On battery</lang>
+  </resource>
+  <resource id="STATUS_ON_AC_CHARGING">
+    <lang name="zh-CN">已接通，正在充电</lang>
+    <lang name="en-US">Plugged in, charging</lang>
+  </resource>
+  <resource id="STATUS_ON_AC_NOT_CHARGING">
+    <lang name="zh-CN">已接通，未充电</lang>
+    <lang name="en-US">Plugged in, not charging</lang>
+  </resource>
+  <resource id="STATUS_FULLY_CHARGED">
+    <lang name="zh-CN">已充满</lang>
+    <lang name="en-US">Fully charged</lang>
+  </resource>
+  <resource id="STATUS_ACPOWER">
+    <lang name="zh-CN">正在使用交流电</lang>
+    <lang name="en-US">On AC power</lang>
+  </resource>
+  <resource id="FLYOUT_PS_TITLE">
+    <lang name="zh-CN">电源状态 ({0})</lang>
+    <lang name="en-US">Power Status ({0})</lang>
+  </resource>
+  <resource id="FLYOUT_PRDS_TITLE">
+    <lang name="zh-CN">电源相关显示设置</lang>
+    <lang name="en-US">Power-Related Display Settings</lang>
+  </resource>
+  <resource id="FLYOUT_PRDS_KEEP_TITLE">
+    <lang name="zh-CN">保持屏幕常亮</lang>
+    <lang name="en-US">Keep my screen on</lang>
+  </resource>
+  <resource id="FLYOUT_PRDS_KEEP_TEXT">
+    <lang name="zh-CN">为了节省电池电量，当计算机处于非活动状态时，屏幕会关闭。</lang>
+    <lang name="en-US">To conserve battery power, your screen turns off when your computer is inactive.</lang>
+  </resource>
+  <resource id="FLYOUT_PRDS_KEEP_CHKBTN">
+<lang name="zh-CN">在磁贴固定期间保持屏幕常亮</lang>
+<lang name="en-US">Keep screen on while this tile is pinned</lang>
+  </resource>
+  <resource id="FLYOUT_ASB_TITLE">
+    <lang name="zh-CN">调整屏幕亮度</lang>
+    <lang name="en-US">Adjust the screen brightness</lang>
+  </resource>
+  <resource id="FLYOUT_ASB_TEXT">
+    <lang name="zh-CN">你可以通过调暗屏幕亮度来节省电池电量。</lang>
+    <lang name="en-US">You can conserve battery power by dimming your screen brightness.</lang>
+  </resource>
+  <resource id="FLYOUT_ASB_DIM">
+    <lang name="zh-CN">暗</lang>
+    <lang name="en-US">Dim</lang>
+  </resource>
+  <resource id="FLYOUT_ASB_BRIGHT">
+    <lang name="zh-CN">亮</lang>
+    <lang name="en-US">Bright</lang>
+  </resource>
+  <resource id="FLYOUT_PP_FOLD">
+    <lang name="zh-CN">隐藏电源计划</lang>
+    <lang name="en-US">Hide power plans</lang>
+  </resource>
+  <resource id="FLYOUT_PP_UNFOLD">
+    <lang name="zh-CN">显示电源计划</lang>
+    <lang name="en-US">Show power plans</lang>
+  </resource>
+  <resource id="FLYOUT_PP_TITLE">
+    <lang name="zh-CN">电源计划</lang>
+    <lang name="en-US">Power Plans</lang>
+  </resource>
+  <resource id="FLYOUT_PP_LONGEST_TITLE">
+    <lang name="zh-CN">最长电池寿命</lang>
+    <lang name="en-US">Longest Battery Life</lang>
+  </resource>
+  <resource id="FLYOUT_PP_LONGEST_TEXT">
+    <lang name="zh-CN">电池电量比计算机速度更重要。</lang>
+    <lang name="en-US">Battery power is more important than computer speed.</lang>
+  </resource>
+  <resource id="FLYOUT_PP_BALANCED_TITLE">
+    <lang name="zh-CN">平衡 (推荐)</lang>
+    <lang name="en-US">Balanced (Recommended)</lang>
+  </resource>
+  <resource id="FLYOUT_PP_BALANCED_TEXT">
+    <lang name="zh-CN">电池电量和计算机速度达到平衡。</lang>
+    <lang name="en-US">Battery power and computer speed are balanced.</lang>
+  </resource>
+  <resource id="FLYOUT_PP_HIGHEST_TITLE">
+    <lang name="zh-CN">最高性能</lang>
+    <lang name="en-US">Highest Performance</lang>
+  </resource>
+  <resource id="FLYOUT_PP_HIGHEST_TEXT">
+    <lang name="zh-CN">计算机速度比电池电量更重要。</lang>
+    <lang name="en-US">Computer speed is more important than battery power.</lang>
+  </resource>
+</resources>
