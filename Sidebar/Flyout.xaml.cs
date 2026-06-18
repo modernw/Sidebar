@@ -72,9 +72,9 @@ namespace Sidebar
 		public void FixPosition ()
 		{
 			var cc = App.CurrentUserConfig;
-			if (tileComp == null || !tileComp.IsLoaded) return;
+			if (tileComp == null ) return;
 			try { UpdateLayout (); } catch { }
-			var mainWindow = Window.GetWindow (tileComp);
+			var mainWindow = Window.GetWindow (tileComp) ?? Application.Current.MainWindow;
 			HWND hwnd = new WindowInteropHelper (mainWindow).Handle;
 			var tsz = TileRect;
 			var fsz = PixelSize;

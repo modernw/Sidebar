@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sidebar"
+		xmlns:snt="clr-namespace:Sidebar;assembly=Native"
         mc:Ignorable="d" ResizeMode="NoResize" Opacity="1" ShowInTaskbar="False"
         Title="MainWindow" Height="600" Width="150" Background="Transparent" AllowsTransparency="True" WindowStyle="None" SizeChanged="Window_SizeChanged" HorizontalAlignment="Stretch" VerticalAlignment="Top" Unloaded="Window_Unloaded" Loaded="Window_Loaded" ContentRendered="Window_ContentRendered" SourceInitialized="Window_SourceInitialized" Closed="Window_Closed" MouseMove="Window_MouseMove" MouseDoubleClick="Window_MouseDoubleClick">
 	<Window.Resources>
@@ -60,13 +61,14 @@
 			</Grid.RenderTransform>
 			<Rectangle Name="BackgroundBlur" Fill="Transparent" IsHitTestVisible="False" SnapsToDevicePixels="True"></Rectangle>
 			<Rectangle Name="Background" Style="{DynamicResource Background}"></Rectangle>
+			<snt:Slice9Image Name="BackgroundImage1" Style="{DynamicResource BackgroundImageSlice9}"></snt:Slice9Image>
 			<Image Name="BackgroundImage" Style="{DynamicResource BackgroundImage}"></Image>
 			<Rectangle Name="BackgroundHighlight" Style="{DynamicResource BackgroundHighlight}"></Rectangle>
 			<Canvas Name="BackgroundCustom" Style="{DynamicResource BackgroundCustomDraw}"></Canvas>
 			<Grid>
 				<Line x:Name="BorderLine" 
 				  X1="0" Y1="0" X2="0" Y2="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}" 
-				  StrokeThickness="1" Style="{DynamicResource BorderLine}"/>
+				  Style="{DynamicResource BorderLine}"/>
 			</Grid>
 		</Grid>
 		<Grid Name="Content" Background="{x:Null}">
@@ -84,7 +86,7 @@
 			<DockPanel Name="MainPanel" Style="{DynamicResource MainPanel}">
 				<StackPanel Name="PinnedTilesRegion" Style="{DynamicResource PinnedTilesRegion}"></StackPanel>
 				<Grid Name="OverflowTilesRegion" Height="0" DockPanel.Dock="Bottom">
-					<StackPanel>
+					<StackPanel Name="OverflowTilesRegionContent">
 						<StackPanel Style="{DynamicResource TileSplitterPanel}" RenderTransformOrigin="0.5,0.5" Cursor="Arrow">
 							<StackPanel.RenderTransform>
 								<ScaleTransform ScaleX="{Binding Source={StaticResource CurrentUserConfig}, 

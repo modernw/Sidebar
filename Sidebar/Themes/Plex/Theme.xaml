@@ -38,6 +38,7 @@
 	</Style>
 	<Style x:Key="BorderLine" TargetType="Line">
 		<Setter Property="Stroke" Value="#3564A7"></Setter>
+		<Setter Property="StrokeThickness" Value="1"></Setter>
 	</Style>
 	<Style x:Key="TileSplitterPanel" TargetType="StackPanel">
 		<Setter Property="DockPanel.Dock" Value="Bottom"/>

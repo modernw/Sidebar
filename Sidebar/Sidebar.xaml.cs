@@ -1141,6 +1141,9 @@ namespace Sidebar
 			{
 				var t = tvi.TileElement as Tile;
 				OverflowTiles.Remove (tvi);
+				if (t.Parent == null)
+					(t.IsPinned ? PinnedTilesRegion : TilesRegion).Children.Add (t);
+				continue;
 				if (t.IsPinned)
 				{
 					if (t.Parent == null)
@@ -1153,6 +1156,7 @@ namespace Sidebar
 				}
 			}
 			willremove?.Clear ();
+			PinnedTilesRegion.MaxHeight = MainPanel.ActualHeight - OverflowTilesRegionContent.ActualHeight;
 		}
 		public void RefreshTileMaxHeight ()
 		{
@@ -1191,7 +1195,7 @@ namespace Sidebar
 			else if (parent == PinnedTilesRegion)
 			{
 				Point tileTopLeft = tile.TransformToAncestor (MainPanel).Transform (new Point (0, 0));
-				return tileTopLeft.Y - OverflowTilesRegion.ActualHeight < 0;
+				return tileTopLeft.Y - OverflowTilesRegion.ActualHeight > MainPanel.ActualHeight;
 			}
 			return false;
 		}

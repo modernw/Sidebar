@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sidebar"
+		xmlns:snt="clr-namespace:Sidebar;assembly=Native"
         mc:Ignorable="d" ResizeMode="NoResize" ShowInTaskbar="False"
         Title="Flyout" Height="300" Width="300" Background="Transparent" MinWidth="54" MinHeight="21" WindowStyle="None" AllowsTransparency="True" SizeChanged="Window_SizeChanged" Loaded="Window_Loaded" Deactivated="Window_Deactivated" Topmost="True" Closing="Window_Closing" SourceInitialized="Window_SourceInitialized">
 	<Grid>
@@ -11,6 +12,7 @@
 			<Rectangle Name="FlyoutBackgroundBlur" Fill="Transparent" IsHitTestVisible="False" SnapsToDevicePixels="True"></Rectangle>
 			<Rectangle Name="FlyoutBackgroundFill" Style="{DynamicResource FlyoutBackgroundFill}"></Rectangle>
 			<Rectangle Name="FlyoutBorderBehind" Style="{DynamicResource FlyoutBorderBehind}"></Rectangle>
+			<snt:Slice9Image Name="FlyoutBackgroundImage1" Style="{DynamicResource FlyoutBackgroundImageSlice9}"></snt:Slice9Image>
 			<Image Name="FlyoutBackgroundImage" Style="{DynamicResource FlyoutBackgroundImage}"></Image>
 			<Rectangle Name="FlyoutBorder" Style="{DynamicResource FlyoutBorder}"></Rectangle>
 			<Rectangle Name="FlyoutBorder1" Style="{DynamicResource FlyoutBorder1}"></Rectangle>
