@@ -7,6 +7,10 @@
 * Information regarding third-party code and attribution can be found in the `NOTICE` file. The original LongBar license text is included in the `LICENSE - LongBar` file.
 * This project utilizes AI assistance in some aspects of development.
 
+## SDK
+
+Download: https://github.com/modernw/Sidebar/releases/tag/sdk2026.6.20
+
 ## Acknowledgements
 
 Sidebar was inspired by the LongBar project. Thanks to the original LongBar authors for their work.
