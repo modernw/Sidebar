@@ -5,7 +5,6 @@
 	<!-- Includes -->
 	<!-- Options -->
 	<s:Boolean x:Key="EnableBlur">false</s:Boolean>
-	<s:Boolean x:Key="EnableShadow">false</s:Boolean>
 	<s:Boolean x:Key="EnableBlurForFlyout">true</s:Boolean>
 	<s:Boolean x:Key="EnableBlurForDrag">true</s:Boolean>
 	<!-- Styles -->

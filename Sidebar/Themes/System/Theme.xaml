@@ -4,7 +4,6 @@
 					xmlns:s="clr-namespace:System;assembly=mscorlib">
 	<!-- Options -->
 	<s:Boolean x:Key="EnableBlur">true</s:Boolean>
-	<s:Boolean x:Key="EnableShadow">false</s:Boolean>
 	<!-- Tiles -->
 	<!-- Clock -->
 	<!-- Clock:ClockFace -->

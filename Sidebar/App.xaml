@@ -138,6 +138,7 @@
 					<Style x:Key="TopOptionsText" TargetType="TextBlock">
 						<Setter Property="Foreground" Value="{DynamicResource GlobalForegroundBrush}"/>
 						<Setter Property="FontSize" Value="{DynamicResource GlobalNormalFontSize}"/>
+						<Setter Property="FontFamily" Value="{DynamicResource GlobalFontFamily}" />
 					</Style>
 					<Style x:Key="TopOptionsIcon" TargetType="Polygon">
 						<Setter Property="Opacity" Value="0.45" />
@@ -194,29 +195,17 @@
 						<Setter Property="StrokeLineJoin" Value="Round" />
 					</Style>
 					<Style x:Key="PinnedTileIcon" BasedOn="{StaticResource TileIcon}" TargetType="Image" />
-					<Style
-						x:Key="PinnedTileTitle"
-						BasedOn="{StaticResource TileTitle}"
-						TargetType="TextBlock" />
+					<Style x:Key="PinnedTileTitle" BasedOn="{StaticResource TileTitle}" TargetType="TextBlock" />
 					<Style x:Key="PinnedTileHeader" TargetType="DockPanel">
 						<Setter Property="Visibility" Value="Collapsed" />
 					</Style>
-					<Style
-						x:Key="PinnedTileFlyoutIcon"
-						BasedOn="{StaticResource TileFlyoutIcon}"
-						TargetType="Polygon">
+					<Style x:Key="PinnedTileFlyoutIcon" BasedOn="{StaticResource TileFlyoutIcon}" TargetType="Polygon">
 						<Setter Property="Margin" Value="1,4,1,0" />
 					</Style>
-					<Style
-						x:Key="PinnedTileContent"
-						BasedOn="{StaticResource TileContent}"
-						TargetType="Grid">
-						<Setter Property="Margin" Value="0,0,1,0" />
+					<Style x:Key="PinnedTileContent" BasedOn="{StaticResource TileContent}" TargetType="Grid">
+						<!-- <Setter Property="Margin" Value="0,0,1,0" /> -->
 					</Style>
-					<Style
-						x:Key="PinnedTileSplitterPanel"
-						BasedOn="{StaticResource TileSplitterPanel}"
-						TargetType="StackPanel">
+					<Style x:Key="PinnedTileSplitterPanel" BasedOn="{StaticResource TileSplitterPanel}" TargetType="StackPanel">
 						<Setter Property="DockPanel.Dock" Value="Top" />
 					</Style>
 					<Style x:Key="AutoHideScrollViewer" TargetType="ScrollViewer">
@@ -244,7 +233,6 @@
 											ViewportSize="{TemplateBinding ViewportHeight}"
 											Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
 											Value="{TemplateBinding VerticalOffset}">
-											<!--  按下时立即完全不透明，松开时恢复半透明  -->
 											<ScrollBar.Triggers>
 												<EventTrigger RoutedEvent="Mouse.MouseDown">
 													<BeginStoryboard>

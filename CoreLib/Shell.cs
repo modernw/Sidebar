@@ -1,4 +1,11 @@
-﻿using System;
+﻿// This file contains code derived from the LongBar project, licensed under the Microsoft Public License (Ms-PL).
+// Original copyright belongs to the LongBar authors.
+// As required by the Ms-PL, this derivative work retains the original copyright notice
+// and is distributed under the terms of the Ms-PL license.
+// Modification history:
+// - 2026-05-09: Bruce adapted and modified the code for use with taskbar overlay functionality.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

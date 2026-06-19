@@ -1,10 +1,17 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<!--
+    Derived from the LongBar project (Ms-PL).
+    Original copyright belongs to the LongBar authors.
+    This derivative work retains the original copyright notice
+    and is distributed under the terms of the Ms-PL.
+
+    Modified by Bruce using and adapting portions of the original styles.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Sidebar"
 					xmlns:s="clr-namespace:System;assembly=mscorlib">
 	<!-- Options -->
 	<s:Boolean x:Key="EnableBlur">false</s:Boolean>
-	<s:Boolean x:Key="EnableShadow">false</s:Boolean>
 	<!-- Styles -->
 	<SolidColorBrush x:Key="GlobalForegroundBrush" Color="White" />
 	<s:Double x:Key="GlobalFontSize">10</s:Double>
