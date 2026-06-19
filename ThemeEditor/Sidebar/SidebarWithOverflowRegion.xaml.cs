@@ -19,13 +19,25 @@ using NativePart = Sidebar;
 namespace ThemeEditor.Sidebar
 {
 	/// <summary>
-	/// Sidebar.xaml 的交互逻辑
+	/// SidebarWithOverflowRegion.xaml 的交互逻辑
 	/// </summary>
-	public partial class Sidebar: UserControl, INeedWindowControl
+	public partial class SidebarWithOverflowRegion: UserControl, INeedWindowControl
 	{
-		public Sidebar ()
+		public SidebarWithOverflowRegion ()
 		{
 			InitializeComponent ();
+			var bm = new BitmapImage ();
+			bm.BaseUri = new Uri (AppDomain.CurrentDomain.BaseDirectory, UriKind.RelativeOrAbsolute);
+			bm.UriSource = new Uri (System.IO.Path.Combine (AppDomain.CurrentDomain.BaseDirectory, "Images\\default.ico"), UriKind.RelativeOrAbsolute);
+			bm.Freeze ();
+			for (var i = 0; i < 10; i ++)
+			{
+				OverflowTiles.Add (new TileVisualInfo {
+					TileLogo = bm,
+					TileTitle = "Tile Title"
+				});
+			}
+			//TileOverflowItems.ItemsSource = OverflowTiles;
 		}
 		public bool AllowTransparency
 		{
@@ -113,6 +125,12 @@ namespace ThemeEditor.Sidebar
 			{
 				DWMAPI.DisableBlur (ref hwnd);
 			}
+		}
+		public ObservableCollection<TileVisualInfo> OverflowTiles = new ObservableCollection<TileVisualInfo> ();
+		public class TileVisualInfo
+		{
+			public virtual ImageSource TileLogo { get; set; }
+			public virtual string TileTitle { get; set; }
 		}
 	}
 }

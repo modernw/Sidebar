@@ -66,6 +66,7 @@
 					</Style>
 					<Style x:Key="BorderLine" TargetType="Line">
 						<Setter Property="Stroke" Value="#53000000" />
+						<Setter Property="StrokeThickness" Value="1"></Setter>
 					</Style>
 					<Style x:Key="BackgroundCustomDraw" TargetType="Canvas">
 						<Setter Property="Visibility" Value="Collapsed" />
@@ -142,10 +143,14 @@
 						<Setter Property="Width" Value="8" />
 						<Setter Property="Visibility" Value="Hidden" />
 					</Style>
+					<Style x:Key="BackgroundImageSlice9" TargetType="snt:Slice9Image">
+						<Setter Property="Visibility" Value="Collapsed"></Setter>
+					</Style>
 					<!--  Top Options  -->
 					<Style x:Key="TopOptionsText" TargetType="TextBlock">
 						<Setter Property="Foreground" Value="{DynamicResource GlobalForegroundBrush}"/>
 						<Setter Property="FontSize" Value="{DynamicResource GlobalNormalFontSize}"/>
+						<Setter Property="FontFamily" Value="{DynamicResource GlobalFontFamily}" />
 					</Style>
 					<Style x:Key="TopOptionsIcon" TargetType="Polygon">
 						<Setter Property="Opacity" Value="0.45" />
@@ -219,7 +224,7 @@
 						x:Key="PinnedTileContent"
 						BasedOn="{StaticResource TileContent}"
 						TargetType="Grid">
-						<Setter Property="Margin" Value="0,0,1,0" />
+						<!-- <Setter Property="Margin" Value="0,0,1,0" /> -->
 					</Style>
 					<Style
 						x:Key="PinnedTileSplitterPanel"
@@ -330,6 +335,9 @@
 					</Style>
 					<Style x:Key="FlyoutContent" TargetType="Grid">
 						<Setter Property="Margin" Value="4,17,4,4" />
+					</Style>
+					<Style x:Key="FlyoutBackgroundImageSlice9" TargetType="snt:Slice9Image">
+						<Setter Property="Visibility" Value="Collapsed"></Setter>
 					</Style>
 					<!--  Drag  -->
 					<Style x:Key="DragWindowStyle" TargetType="FrameworkElement">
@@ -1514,56 +1522,79 @@
 
 					<!-- Material -->
 					<!-- Notification -->
+					<ImageSource x:Key="TileNotificationRingNormalImage">Images\Notification\Notification.png</ImageSource>
+					<ImageSource x:Key="TileNotificationRingAbnormalImage">Images\Notification\NotificationImportant.png</ImageSource>
+					<ImageSource x:Key="TileNotificationMessageImage">Images\Notification\Message.png</ImageSource>
+					<ImageSource x:Key="TileNotificationMessage2Image">Images\Notification\Message2.png</ImageSource>
+					<ImageSource x:Key="TileNotificationMessage3Image">Images\Notification\Message3.png</ImageSource>
+					<ImageSource x:Key="TileNotificationMessage4Image">Images\Notification\Message4.png</ImageSource>
 					<Style x:Key="TileNotificationRingNormal" TargetType="Image">
-						<Setter Property="Source" Value="Images\Notification\Notification.png"></Setter>
+						<Setter Property="Source" Value="{DynamicResource TileNotificationRingNormalImage}"/>
 					</Style>
 					<Style x:Key="TileNotificationRingAbnormal" TargetType="Image">
-						<Setter Property="Source" Value="Images\Notification\NotificationImportant.png"></Setter>
+						<Setter Property="Source" Value="{DynamicResource TileNotificationRingAbnormalImage}"/>
 					</Style>
 					<Style x:Key="TileNotificationMessage" TargetType="Image">
-						<Setter Property="Source" Value="Images\Notification\Message.png"></Setter>
+						<Setter Property="Source" Value="{DynamicResource TileNotificationMessageImage}"/>
 					</Style>
 					<Style x:Key="TileNotificationMessage2" TargetType="Image">
-						<Setter Property="Source" Value="Images\Notification\Message2.png"></Setter>
+						<Setter Property="Source" Value="{DynamicResource TileNotificationMessage2Image}"/>
 					</Style>
 					<Style x:Key="TileNotificationMessage3" TargetType="Image">
-						<Setter Property="Source" Value="Images\Notification\Message3.png"></Setter>
+						<Setter Property="Source" Value="{DynamicResource TileNotificationMessage3Image}"/>
 					</Style>
 					<Style x:Key="TileNotificationMessage4" TargetType="Image">
-						<Setter Property="Source" Value="Images\Notification\Message4.png"></Setter>
+						<Setter Property="Source" Value="{DynamicResource TileNotificationMessage4Image}"/>
 					</Style>
 					<!-- Clock -->
+					<ImageSource x:Key="TileClockFlyoutClockAlarmRegulatorImage">Images\Clock\AlarmNormal.png</ImageSource>
+					<ImageSource x:Key="TileClockFlyoutClockAlarmRegulatorHoverImage">Images\Clock\AlarmHover.png</ImageSource>
+					<ImageSource x:Key="TileClockFlyoutClockAlarmRegulatorPmImage">Images\Clock\AlarmNormalPM.png</ImageSource>
+					<ImageSource x:Key="TileClockFlyoutClockAlarmRegulatorPmHoverImage">Images\Clock\AlarmHoverPM.png</ImageSource>
 					<Style x:Key="TileClockFlyoutClockAlarmRegulator" TargetType="Image">
-						<Setter Property="Source" Value="Images\Clock\AlarmNormal.png"></Setter>
+						<Setter Property="Source" Value="{DynamicResource TileClockFlyoutClockAlarmRegulatorImage}"/>
 					</Style>
 					<Style x:Key="TileClockFlyoutClockAlarmRegulatorHover" TargetType="Image">
-						<Setter Property="Source" Value="Images\Clock\AlarmHover.png"></Setter>
+						<Setter Property="Source" Value="{DynamicResource TileClockFlyoutClockAlarmRegulatorHoverImage}"/>
 					</Style>
 					<Style x:Key="TileClockFlyoutClockAlarmRegulatorPm" TargetType="Image">
-						<Setter Property="Source" Value="Images\Clock\AlarmNormalPM.png"></Setter>
+						<Setter Property="Source" Value="{DynamicResource TileClockFlyoutClockAlarmRegulatorPmImage}"/>
 					</Style>
 					<Style x:Key="TileClockFlyoutClockAlarmRegulatorPmHover" TargetType="Image">
-						<Setter Property="Source" Value="Images\Clock\AlarmHoverPM.png"></Setter>
+						<Setter Property="Source" Value="{DynamicResource TileClockFlyoutClockAlarmRegulatorPmHoverImage}"/>
 					</Style>
 					<!-- People Nearby -->
+					<ImageSource x:Key="TilePeopleNearbyOffImage">Images\People Nearby\PeopleNearbyOff.png</ImageSource>
 					<Style x:Key="TilePeopleNearbyOff" TargetType="Image">
-						<Setter Property="Source" Value="Images\People Nearby\PeopleNearbyOff.png"></Setter>
+						<Setter Property="Source" Value="{DynamicResource TilePeopleNearbyOffImage}"></Setter>
 					</Style>
+					<ImageSource x:Key="TilePeopleNearbyOnImage">Images\People Nearby\PeopleNearbyOn.png</ImageSource>
 					<Style x:Key="TilePeopleNearbyOn" TargetType="Image">
-						<Setter Property="Source" Value="Images\People Nearby\PeopleNearbyOn.png"></Setter>
+						<Setter Property="Source" Value="{DynamicResource TilePeopleNearbyOnImage}"></Setter>
 					</Style>
+					<ImageSource x:Key="TilePeopleNearbyOnImageLight">Images\People Nearby\PeopleNearbyOnLight.png</ImageSource>
 					<Style x:Key="TilePeopleNearbyOnLight" TargetType="Image">
-						<Setter Property="Source" Value="Images\People Nearby\PeopleNearbyOnLight.png"></Setter>
+						<Setter Property="Source" Value="{DynamicResource TilePeopleNearbyOnImageLight}"></Setter>
 					</Style>
 					<!-- Basket -->
+					<ImageSource x:Key="TileBasketTileImageImage">Images\Basket\Basket.png</ImageSource>
 					<Style x:Key="TileBasketTileImage" TargetType="Image">
-						<Setter Property="Source" Value="Images\Basket\Basket.png"></Setter>
+						<Setter Property="Source" Value="{DynamicResource TileBasketTileImageImage}"/>
 					</Style>
 					<!-- Button Image -->
 					<ImageSource x:Key="TileIconItemHoverImage">Images\Others\IconItemHover.png</ImageSource>
 					<ImageSource x:Key="TileIconItemActiveImage">Images\Others\IconItemPress.png</ImageSource>
 					<ImageSource x:Key="TileItemHoverImage">Images\Others\ItemHover.png</ImageSource>
-					
+
+					<!-- Newer -->
+					<!-- Overflow Tiles -->
+					<Style x:Key="SidebarOverflowTileItem" TargetType="ToggleButton" BasedOn="{StaticResource TileIconItemButtonStyle}">
+					</Style>
+					<ItemsPanelTemplate x:Key="SidebarOverflowTileItemWrapPanel">
+						<WrapPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+					</ItemsPanelTemplate>
+					<Style x:Key="SidebarOverflowTileItemControlContainer" TargetType="ItemsControl" BasedOn="{StaticResource TileIconItemTileContainer}"></Style>
+
 					<!-- For Preview -->
 					<Style x:Key="PreviewIconStyle" TargetType="Image">
 						<Setter Property="Source" Value="Images\default.ico"></Setter>

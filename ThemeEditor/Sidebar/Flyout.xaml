@@ -14,6 +14,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ThemeEditor.Sidebar"
 			 xmlns:sib="clr-namespace:ThemeEditor.Sidebar"
+			 xmlns:snt="clr-namespace:Sidebar;assembly=Native"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 	<Grid>
