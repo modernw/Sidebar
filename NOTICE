@@ -1,0 +1,31 @@
+This project contains portions of code derived from the LongBar project.
+
+LongBar is licensed under the Microsoft Public License (Ms-PL).
+Copyright of the original LongBar code belongs to its original authors.
+
+The following files contain code derived from LongBar:
+
+- CoreLib/Shell.cs
+  Portions derived from LongBar/Core/General/Sidebar.cs
+
+- Sidebar/Themes/Aero/Theme.xaml
+  Portions derived from LongBar/LongBar/General/Themes/Aero.theme.xaml
+
+- Sidebar/Themes/Slate/Theme.xaml
+  Portions derived from LongBar theme files.
+
+- Sidebar/Themes/Plex/Theme.xaml
+  Portions derived from LongBar theme files.
+
+- Sidebar/Sidebar.xaml
+  Portions derived from LongBar/LongBar.xaml
+
+- Sidebar/Tile.xaml
+  Portions derived from LongBar/Tile.xaml
+
+- Sidebar/Flyout.xaml
+  Portions derived from LongBar/Flyout.xaml
+
+These files have been modified for use in the Sidebar project.
+
+The original LongBar source code and copyright notices are retained in accordance with the terms of the Microsoft Public License (Ms-PL).

@@ -1103,15 +1103,19 @@ namespace Sidebar
 		public void OnTileHeightChanged (object sender, EventArgs e)
 		{
 			var removeTileCollection = new List<Tile> ();
-			foreach (Tile t in PinnedTilesRegion.Children)
+			foreach (FrameworkElement fe in PinnedTilesRegion.Children)
 			{
+				if (!(fe is Tile)) continue;
+				var t = fe as Tile;
 				if (CheckIsTileOverflow (t))
 				{
 					removeTileCollection.Add (t);
 				}
 			}
-			foreach (Tile t in TilesRegion.Children)
+			foreach (FrameworkElement fe in TilesRegion.Children)
 			{
+				if (!(fe is Tile)) continue;
+				var t = fe as Tile;
 				if (CheckIsTileOverflow (t))
 				{
 					removeTileCollection.Add (t);

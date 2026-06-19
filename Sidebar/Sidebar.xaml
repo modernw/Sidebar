@@ -113,7 +113,7 @@
 						  ItemsPanel="{DynamicResource SidebarOverflowTileItemWrapPanel}"
 						  />
 					</StackPanel>
-					<Rectangle IsHitTestVisible="False" Style="{DynamicResource TileHighlight}">
+					<Rectangle IsHitTestVisible="False" Style="{DynamicResource PinnedTileHighlight}">
 						<Rectangle.RenderTransform>
 							<ScaleTransform ScaleX="{Binding Source={StaticResource CurrentUserConfig}, Path=Direction, Converter={StaticResource DirectionToScaleX}}"/>
 						</Rectangle.RenderTransform>
