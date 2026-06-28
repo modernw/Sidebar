@@ -18,6 +18,27 @@ namespace WindowsModern.TrayTile
 			tilePanel = tilePanel ?? new TilePanel ();
 			var tuip = TileUI as Panel;
 			tuip.Children.Add (tilePanel);
+			FlyoutInit += Tile_FlyoutInit;
+			FlyoutClosed += Tile_FlyoutClosed;
+		}
+		private void Tile_FlyoutClosed (object sender, EventArgs e)
+		{
+			tilePanel?.OnFlyoutDestroy ();
+		}
+		private void Tile_FlyoutInit (object sender, FlyoutAboutEventArgs e)
+		{
+			e.Window.SizeToContent = System.Windows.SizeToContent.WidthAndHeight;
+			e.Window.MaxWidth = 300;
+			e.Window.MaxHeight = 200;
+			e.FlyoutWindowFeatures.FixPosition ();
+			tilePanel?.OnFlyoutInit (e);
+		}
+		public override void OnDestroy ()
+		{
+			tilePanel?.Dispose ();
+			tilePanel = null;
+			FlyoutInit -= Tile_FlyoutInit;
+			FlyoutClosed -= Tile_FlyoutClosed;
 		}
 	}
 }

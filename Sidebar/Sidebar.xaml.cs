@@ -1100,67 +1100,77 @@ namespace Sidebar
 			t.RequireOpenFlyout ();
 		}
 		public ObservableCollection<TileVisualInfo> OverflowTiles = new UniqueObservableCollection<TileVisualInfo> (o => o);
+		private bool isTileHeightChanging = false;
 		public void OnTileHeightChanged (object sender, EventArgs e)
 		{
-			var removeTileCollection = new List<Tile> ();
-			foreach (FrameworkElement fe in PinnedTilesRegion.Children)
+			if (isTileHeightChanging) return;
+			isTileHeightChanging = true;
+			try
 			{
-				if (!(fe is Tile)) continue;
-				var t = fe as Tile;
-				if (CheckIsTileOverflow (t))
+				var removeTileCollection = new List<Tile> ();
+				foreach (FrameworkElement fe in PinnedTilesRegion.Children)
 				{
-					removeTileCollection.Add (t);
+					if (!(fe is Tile)) continue;
+					var t = fe as Tile;
+					if (CheckIsTileOverflow (t))
+					{
+						removeTileCollection.Add (t);
+					}
 				}
-			}
-			foreach (FrameworkElement fe in TilesRegion.Children)
-			{
-				if (!(fe is Tile)) continue;
-				var t = fe as Tile;
-				if (CheckIsTileOverflow (t))
+				foreach (FrameworkElement fe in TilesRegion.Children)
 				{
-					removeTileCollection.Add (t);
+					if (!(fe is Tile)) continue;
+					var t = fe as Tile;
+					if (CheckIsTileOverflow (t))
+					{
+						removeTileCollection.Add (t);
+					}
 				}
-			}
-			foreach (var t in removeTileCollection)
-			{
-				(t?.Parent as Panel)?.Children?.Remove (t);
-				OverflowTiles.Add (t.TileVisual);
-			}
-			if (OverflowTiles.Count <= 0) return;
-			Point pinnedTileRegionTopLeft = PinnedTilesRegion.TransformToAncestor (MainPanel).Transform (new Point (0, 0));
-			var tth = pinnedTileRegionTopLeft.Y - OverflowTilesRegion.ActualHeight;
-			var remain = tth;
-			foreach (FrameworkElement t in TilesRegion.Children)
-			{
-				remain -= t.ActualHeight;
-			}
-			var willremove = new List<TileVisualInfo> ();
-			foreach (TileVisualInfo tvi in OverflowTiles.Reverse ())
-			{
-				var t = tvi.TileElement as Tile;
-				if (remain - t.ActualHeight < 0) break;
-				willremove.Add (tvi);
-			}
-			foreach (var tvi in willremove)
-			{
-				var t = tvi.TileElement as Tile;
-				OverflowTiles.Remove (tvi);
-				if (t.Parent == null)
-					(t.IsPinned ? PinnedTilesRegion : TilesRegion).Children.Add (t);
-				continue;
-				if (t.IsPinned)
+				foreach (var t in removeTileCollection)
 				{
+					(t?.Parent as Panel)?.Children?.Remove (t);
+					OverflowTiles.Add (t.TileVisual);
+				}
+				if (OverflowTiles.Count <= 0) return;
+				Point pinnedTileRegionTopLeft = PinnedTilesRegion.TransformToAncestor (MainPanel).Transform (new Point (0, 0));
+				var tth = pinnedTileRegionTopLeft.Y - OverflowTilesRegion.ActualHeight;
+				var remain = tth;
+				foreach (FrameworkElement t in TilesRegion.Children)
+				{
+					remain -= t.ActualHeight;
+				}
+				var willremove = new List<TileVisualInfo> ();
+				foreach (TileVisualInfo tvi in OverflowTiles.Reverse ())
+				{
+					var t = tvi.TileElement as Tile;
+					if (remain - t.ActualHeight < 0) break;
+					willremove.Add (tvi);
+				}
+				foreach (var tvi in willremove)
+				{
+					var t = tvi.TileElement as Tile;
+					OverflowTiles.Remove (tvi);
 					if (t.Parent == null)
-						PinnedTilesRegion.Children.Insert (0, t);
+						(t.IsPinned ? PinnedTilesRegion : TilesRegion).Children.Add (t);
+					continue;
+					if (t.IsPinned)
+					{
+						if (t.Parent == null)
+							PinnedTilesRegion.Children.Insert (0, t);
+					}
+					else
+					{
+						if (t.Parent == null)
+							TilesRegion.Children.Add (t);
+					}
 				}
-				else
-				{
-					if (t.Parent == null)
-						TilesRegion.Children.Add (t);
-				}
+				willremove?.Clear ();
+				PinnedTilesRegion.MaxHeight = MainPanel.ActualHeight - OverflowTilesRegionContent.ActualHeight;
 			}
-			willremove?.Clear ();
-			PinnedTilesRegion.MaxHeight = MainPanel.ActualHeight - OverflowTilesRegionContent.ActualHeight;
+			finally
+			{
+				isTileHeightChanging = false;
+			}
 		}
 		public void RefreshTileMaxHeight ()
 		{

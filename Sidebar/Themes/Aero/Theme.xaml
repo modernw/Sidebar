@@ -381,6 +381,14 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+	<!-- Tray -->
+	<Style x:Key="TileIconItemForTrayTile" TargetType="ToggleButton" BasedOn="{StaticResource TileIconItemButtonStyle}">
+		<Setter Property="Width" Value="24"></Setter>
+		<Setter Property="Height" Value="24"></Setter>
+	</Style>
+	<ItemsPanelTemplate x:Key="TileIconItemWrapPanelForTrayTile">
+		<WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+	</ItemsPanelTemplate>
 	<!-- QuickLaunch -->
 	<Style x:Key="TileIconItemForQuickLaunchTile" TargetType="ToggleButton" BasedOn="{StaticResource TileIconItemButtonStyle}">
 		<Setter Property="Width" Value="28"/>

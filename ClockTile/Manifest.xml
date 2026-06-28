@@ -15,14 +15,14 @@
   <VisualElements>
     <RailStyle>
       <MinHeight>20</MinHeight>
-      <MaxHeight>100</MaxHeight>
+      <MaxHeight>200</MaxHeight>
       <DefaultHeight>60</DefaultHeight>
       <CanPinBottom>true</CanPinBottom>
       <TileHasFlyout>true</TileHasFlyout>
       <FlyoutWidth>501</FlyoutWidth>
       <FlyoutHeight>324</FlyoutHeight>
       <FlyoutCanResize>false</FlyoutCanResize>
-      <Overflow>Auto</Overflow>
+      <Overflow>Hidden</Overflow>
       <DisplayName>TILE_PROP_DISPNAME</DisplayName>
       <TileHasProperties>true</TileHasProperties>
       <Logo>Assets\SmallLogo.png</Logo>

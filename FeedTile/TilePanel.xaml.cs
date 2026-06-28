@@ -411,9 +411,14 @@ namespace WindowsModern.FeedTile
 
 			newVisible.Opacity = 0;
 			oldVisible.Opacity = 1;
-
+			EventHandler fadeOutComp = null;
 			var fadeOut = new DoubleAnimation (1, 0, new Duration (TimeSpan.FromSeconds (0.3)));
 			fadeOut.Completed += OnFadeOutCompleted;
+			fadeOutComp = (s, e) => {
+				//oldVisible.Visibility = Visibility.Collapsed;
+				fadeOut.Completed -= fadeOutComp;
+			};
+			fadeOut.Completed += fadeOutComp;
 			var fadeIn = new DoubleAnimation (0, 1, new Duration (TimeSpan.FromSeconds (0.3)));
 			fadeIn.Completed += OnFadeInCompleted;
 
@@ -551,7 +556,9 @@ namespace WindowsModern.FeedTile
 				visible.Children.Clear ();
 				PopulateContainer (visible, items);
 				visible.Opacity = 1;
-				GetHiddenContainer ().Opacity = 0;
+				var hidden = GetHiddenContainer ();
+				hidden.Opacity = 0;
+				hidden.Visibility = Visibility.Collapsed;
 			}
 			else
 			{

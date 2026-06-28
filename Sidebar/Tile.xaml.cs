@@ -542,6 +542,14 @@ namespace Sidebar
 			{
 				(Instance.Config as TileConfig).AutoSize = true;
 			}
+			else if (e.ClickCount == 1)
+			{
+				if (!Instance.Config.AutoSize)
+				{
+					if (_currentHeightAnimation != null) _currentHeightAnimation.Duration = new Duration (new TimeSpan (0));
+					_isHeightAnimating = false;
+				}
+			}
 			Mouse.Capture (Splitter);
 			isSplitterDragging = true;
 			isResizing = true;
@@ -1149,7 +1157,14 @@ namespace Sidebar
 				_lastTileContentHeight = TileContent.ActualHeight;
 				return;
 			}
-			TileContent.BeginAnimation (FrameworkElement.HeightProperty, null);
+			if (isSplitterDragging)
+			{
+				_lastTileContentHeight = TileContent.ActualHeight;
+				return;
+			}
+			//TileContent.BeginAnimation (FrameworkElement.HeightProperty, null);
+			if (_currentHeightAnimation != null) _currentHeightAnimation.Duration = new Duration (new TimeSpan (0));
+			_isHeightAnimating = false;
 			TransToNewHeight (TileContent, _lastTileContentHeight ?? 0);
 			_lastTileContentHeight = TileContent.ActualHeight;
 		}

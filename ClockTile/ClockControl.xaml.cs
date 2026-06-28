@@ -128,7 +128,7 @@ namespace ClockTile
 				try
 				{
 					TimeZoneInfo tz = TimeZoneInfo.FindSystemTimeZoneById (TimeZoneId);
-					targetTime = TimeZoneInfo.ConvertTime (CurrentTime, TimeZoneInfo.Local, tz);
+					targetTime = TimeZoneInfo.ConvertTimeFromUtc (CurrentTime, tz);
 				}
 				catch
 				{

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ClockTile"
              mc:Ignorable="d" Loaded="OnLoaded" Unloaded="OnUnloaded"
              d:DesignHeight="300" d:DesignWidth="300">
-	<Grid>
+	<Grid Height="Auto" VerticalAlignment="Top">
 		<Grid Name="TilePanelContainer"></Grid>
 	</Grid>
 </UserControl>
